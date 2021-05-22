@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Livewire\UnitKerja;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,4 +24,6 @@ Route::group([ "middleware" => ['auth:sanctum', 'verified'] ], function() {
     Route::get('/user', [ UserController::class, "index_view" ])->name('user');
     Route::view('/user/new', "pages.user.user-new")->name('user.new');
     Route::view('/user/edit/{userId}', "pages.user.user-edit")->name('user.edit');
+
+    Route::get('unit_kerja', UnitKerja::class)->name('unit_kerja');
 });
