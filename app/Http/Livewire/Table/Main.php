@@ -17,7 +17,7 @@ class Main extends Component
     public $sortAsc = false;
     public $search = '';
 
-    protected $listeners = [ "deleteItem" => "delete_item" ];
+    protected $listeners = [ "deleteItem" => "delete_item", "tmbhItem" => "store" ];
 
     public function sortBy($field)
     {
