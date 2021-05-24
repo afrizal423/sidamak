@@ -79,7 +79,7 @@
             {{ $script }}
         @endisset
         <script>
-            $("body").children().first().before($(".modal"));
+            // $("body").children().first().before($(".modal"));
         </script>
     </body>
 </html>
