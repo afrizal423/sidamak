@@ -3,9 +3,13 @@
 namespace App\Http\Livewire\Table;
 use App\Models\UnitKerjas;
 use Livewire\Component;
+use Livewire\WithPagination;
+
 
 class Unitkerja extends Component
 {
+    use WithPagination;
+
     public $model;
     public $name;
 
@@ -14,7 +18,7 @@ class Unitkerja extends Component
     public $sortAsc = false;
     public $search = '';
     public $nama_unit, $jikaUpdate, $id_unit;
-    protected $listeners = [ "deleteItem" => "delete_item" ];
+    protected $listeners = [ "deleteItem" => "delete_item", "tutupModal" => "tutupModal" ];
 
     private function resetInputFields(){
         $this->nama_unit = '';
@@ -30,6 +34,11 @@ class Unitkerja extends Component
      $this->emit('show');
     }
 
+    public function tutupModal()
+    {
+     $this->emit('tutup');
+    }
+
     public function store()
     {
         $this->validate([
@@ -41,24 +50,22 @@ class Unitkerja extends Component
             UnitKerjas::create([
                 'nama_unit'=>$this->nama_unit
             ]);
+            $this->tutupModal();
 
             // Set Flash Message
             session()->flash('success','Category Created Successfully!!');
 
             // Reset Form Fields After Creating Category
             $this->resetInputFields();
-            $this->emit('unitkerjaStore'); // Close model to using to jquery
         }catch(\Exception $e){
             // Set Flash Message
             session()->flash('error','Something goes wrong while creating category!!');
 
             // Reset Form Fields After Creating Category
             $this->resetInputFields();
-            $this->emit('unitkerjaStore'); // Close model to using to jquery
+
         }
-
-        $this->emit('unitkerjaStore'); // Close model to using to jquery
-
+        $this->tutupModal();
     }
 
 
@@ -117,15 +124,18 @@ class Unitkerja extends Component
         $this->jikaUpdate = false;
         // $this->openModal();
     }
+    public function tambah(){
+        $this->resetInputFields();
+        $this->ubahstatus();
+        $this->openModal();
+    }
 
     public function edit($id){
         $category = UnitKerjas::findOrFail($id);
         $this->nama_unit = $category->nama_unit;
         $this->id_unit=$id;
-        // $this->description = $category->description;
-        // $this->category_id = $category->id;
         $this->jikaUpdate = true;
-        // $this->openModal();
+        $this->openModal();
     }
 
     public function update()
@@ -135,14 +145,13 @@ class Unitkerja extends Component
         ]);
 
         try{
-            // Create Category
-            // UnitKerjas::create([
-            //     'nama_unit'=>$this->nama_unit
-            // ]);
+            // Create
             $user = UnitKerjas::find($this->id_unit);
             $user->update([
                 'nama_unit' => $this->nama_unit
             ]);
+            $this->tutupModal();
+
 
             // Set Flash Message
             session()->flash('success');
@@ -157,8 +166,6 @@ class Unitkerja extends Component
             $this->resetInputFields();
         }
         $this->jikaUpdate = false;
-
-
     }
 
     public function render()
