@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DivisiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\UnitKerja;
 /*
@@ -26,4 +27,6 @@ Route::group([ "middleware" => ['auth:sanctum', 'verified'] ], function() {
     Route::view('/user/edit/{userId}', "pages.user.user-edit")->name('user.edit');
 
     Route::get('unit_kerja', UnitKerja::class)->name('unit_kerja');
+    Route::get('divisi', [ DivisiController::class, "index_view" ])->name('divisi');
+
 });
