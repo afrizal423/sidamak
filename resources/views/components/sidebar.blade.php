@@ -9,10 +9,10 @@ $links = [
         "href" => [
             [
                 "section_text" => "User",
-                "section_icon" => "fas fa-chart-bar",
+                "section_icon" => "fas fa-user",
                 "section_list" => [
                     ["href" => "user", "text" => "Data User"],
-                    ["href" => "user.new", "text" => "Buat User"]
+                    ["href" => "jenisuser", "text" => "Jenis User"]
                 ]
             ]
         ],
