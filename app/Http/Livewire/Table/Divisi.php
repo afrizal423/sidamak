@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Table;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\DivisiModels;
 
 
 
@@ -59,7 +58,7 @@ class Divisi extends Component
 
         try{
             // Create Category
-            DivisiModels::create([
+            $this->model::create([
                 'nama_divisi'=>$this->nama_divisi
             ]);
             $this->tutupModal();
@@ -86,7 +85,7 @@ class Divisi extends Component
 
         try{
             // Update
-            $div = DivisiModels::find($this->id_divisi);
+            $div = $this->model::find($this->id_divisi);
             $div->update([
                 'nama_divisi' => $this->nama_divisi
             ]);
@@ -139,7 +138,7 @@ class Divisi extends Component
         $this->sortField = $field;
     }
     public function edit($id){
-        $div = DivisiModels::findOrFail($id);
+        $div = $this->model::findOrFail($id);
         $this->nama_divisi = $div->nama_divisi;
         $this->id_divisi=$id;
         $this->jikaUpdate = true;
@@ -170,6 +169,5 @@ class Divisi extends Component
         $data = $this->get_pagination_data();
 
         return view($data['view'], $data);
-        // return view('livewire.table.divisi');
     }
 }
