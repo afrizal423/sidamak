@@ -18,9 +18,9 @@ $user = auth()->user();
                 <div class="d-sm-none d-lg-inline-block">Hi, Welcome</div></a>
             @endif
             <div class="dropdown-menu dropdown-menu-right">
-                <a href="/user/profile" class="dropdown-item has-icon">
+                {{-- <a href="/user/profile" class="dropdown-item has-icon">
                     <i class="far fa-user"></i> Profile
-                </a>
+                </a> --}}
                 @if (request()->get('is_admin'))
                 <a href="/setting" class="dropdown-item has-icon">
                     <i class="fas fa-cog"></i> Setting

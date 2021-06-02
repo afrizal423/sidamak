@@ -11,7 +11,7 @@ $links = [
                 "section_text" => "User",
                 "section_icon" => "fas fa-user",
                 "section_list" => [
-                    ["href" => "user", "text" => "Data User"],
+                    // ["href" => "user", "text" => "Data User"],
                     ["href" => "jenisuser", "text" => "Jenis User"]
                 ]
             ]
