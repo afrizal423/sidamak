@@ -23,10 +23,17 @@ $links = [
         "href" => [
             [
                 "section_text" => "Kerja",
-                "section_icon" => "fa fa-briefcase",
+                "section_icon" => "fas fa-briefcase",
                 "section_list" => [
                     ["href" => "unit_kerja", "text" => "Data Unit Kerja"],
                     ["href" => "divisi", "text" => "Data Divisi"]
+                ]
+            ],
+            [
+                "section_text" => "Pegawai",
+                "section_icon" => "fas fa-users",
+                "section_list" => [
+                    ["href" => "dtpegawai", "text" => "Data Pegawai"],
                 ]
             ]
         ],

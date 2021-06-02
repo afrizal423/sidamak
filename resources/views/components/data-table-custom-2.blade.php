@@ -1,10 +1,7 @@
-{{-- Table custom menambahkan tombol tambah data maupun tombol lain  --}}
-<div class="card">
-    {{ $inputdata }}
-</div>
+{{-- Table custom tanpa tombol tambah data maupun tombol lain  --}}
 <div class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
     <div class="p-8 pt-4 mt-2 bg-white" x-data="window.__controller.dataTableMainController()" x-init="setCallback();">
-        <div class="row mb-4">
+                <div class="row mb-4">
             <div class="col form-inline">
                 Per Halaman: &nbsp;
                 <select wire:model="perPage" class="form-control">
