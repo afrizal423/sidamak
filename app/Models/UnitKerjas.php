@@ -18,4 +18,8 @@ class UnitKerjas extends Model
         return empty($query) ? static::query()
             : static::where('nama_unit', 'like', '%'.$query.'%');
     }
+
+    public function pegawai(){
+    	return $this->hasMany(Pegawai::class);
+    }
 }

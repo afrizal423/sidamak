@@ -5,6 +5,10 @@ use App\Http\Controllers\DivisiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\UnitKerja;
 use App\Http\Livewire\Jenisuser;
+use App\Http\Livewire\Pegawai\Index;
+use App\Http\Livewire\Pegawai\Tambahpegawai;
+use App\Models\Pegawai;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +34,11 @@ Route::group([ "middleware" => ['auth:sanctum', 'verified'] ], function() {
     Route::get('unit_kerja', UnitKerja::class)->name('unit_kerja');
     Route::get('divisi', [ DivisiController::class, "index_view" ])->name('divisi');
     Route::get('jenisuser', Jenisuser::class)->name('jenisuser');
+
+    Route::get('pegawai', Index::class)->name('dtpegawai');
+    Route::view('pegawai/tambahpegawai', "pages.pegawai.add-pegawai")->name('tambah_pegawai');
+    Route::view('pegawai/ubahpegawai/{pegawaiId}', "pages.pegawai.edit-pegawai")->name('ubah_pegawai');
+
 
 
 });

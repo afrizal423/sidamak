@@ -18,4 +18,8 @@ class JenisUsers extends Model
         return empty($query) ? static::query()
             : static::where('nama_jenis', 'like', '%'.$query.'%');
     }
+
+    public function pegawai(){
+    	return $this->hasMany(Pegawai::class);
+    }
 }
