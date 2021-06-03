@@ -1,4 +1,6 @@
 require('./bootstrap');
+import 'alpinejs';
+import ApexCharts from 'apexcharts';
 
 function dataTableController (id) {
     return {
