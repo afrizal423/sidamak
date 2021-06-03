@@ -9,6 +9,19 @@
     </x-slot>
 
     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-        <x-jet-welcome />
+        {{-- <x-jet-welcome /> --}}
+        <div class="container">
+            <div class="row">
+              <div class="col-sm">
+                One of three columns
+              </div>
+              <div class="col-sm">
+                One of three columns
+              </div>
+              <div class="col-sm">
+                One of three columns
+              </div>
+            </div>
+        </div>
     </div>
 </x-app-layout>
