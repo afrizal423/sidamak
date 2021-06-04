@@ -48,11 +48,13 @@ Route::group([ "middleware" => ['auth:sanctum', 'verified'] ], function() {
         Route::get('pegawai', Index::class)->name('dtpegawai');
         Route::view('pegawai/tambahpegawai', "pages.pegawai.add-pegawai")->name('tambah_pegawai');
         Route::view('pegawai/ubahpegawai/{pegawaiId}', "pages.pegawai.edit-pegawai")->name('ubah_pegawai');
+
+        Route::view('reminder', "pages.reminder.index-reminder")->name('reminder_index');
+
     });
 
     Route::group(['prefix' => 'dashboard/user', 'middleware' => ['Cek_login:user']], function(){
         /**
-         * Route untuk sisi user PKL
          */
         Route::view('/', "dashboard-user")->name('dashboard'); // diubah lagi waktu selesai layouting user
 

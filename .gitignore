@@ -5,6 +5,7 @@
 /vendor
 /public/vendor
 /public/js/app.js
+/resources/views/vendor
 .env
 .env.backup
 .phpunit.result.cache

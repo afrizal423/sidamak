@@ -26,6 +26,11 @@ Berikut adalah cara deploy:
     $ php artisan livewire:publish --assets
     $ php artisan livewire:publish
     ```
+- Jalankan publish package yang dibutuhkan (calendar, chart) dengan cara 
+    ```shell
+    $ php artisan vendor:publish
+    # Pilih sesuai package (calendar, chart) 
+    ```
 - Buka file ```config/liveware.php```
     Ubah ```'asset_url' => null``` menjadi ```'asset_url' => 'http://localhost/{nama_folder}/public'``` 
     atau jika menjalankan server melalui port 8000 tanpa apache ubah menjadi ```'asset_url' => 'http://localhost:8000'``` 
