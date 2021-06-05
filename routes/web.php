@@ -34,13 +34,13 @@ Route::group([ "middleware" => ['auth:sanctum', 'verified'] ], function() {
         } else {
             return 'hayo iseng ya';
         }
-    });
+    })->name('dashboard');
 
     Route::group(['prefix' => 'dashboard/admin', 'middleware' => ['Cek_login:admin']], function(){
         /**
          * Route untuk sisi admin
          */
-        Route::view('/', "dashboard")->name('dashboard');
+        Route::view('/', "dashboard")->name('dashboard_admin');
         Route::get('unit_kerja', UnitKerja::class)->name('unit_kerja');
         Route::get('divisi', [ DivisiController::class, "index_view" ])->name('divisi');
         Route::get('jenisuser', Jenisuser::class)->name('jenisuser');
@@ -56,7 +56,7 @@ Route::group([ "middleware" => ['auth:sanctum', 'verified'] ], function() {
     Route::group(['prefix' => 'dashboard/user', 'middleware' => ['Cek_login:user']], function(){
         /**
          */
-        Route::view('/', "dashboard-user")->name('dashboard'); // diubah lagi waktu selesai layouting user
+        Route::view('/', "dashboard-user")->name('dashboard_user'); // diubah lagi waktu selesai layouting user
 
         // Route::get('/', function () {
         //     return 'ini User ';

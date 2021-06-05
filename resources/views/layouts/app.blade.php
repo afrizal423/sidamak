@@ -31,8 +31,17 @@
 
         <!-- Scripts -->
         <script defer src="{{ asset('vendor/alpine.js') }}"></script>
+        <script src="{{ asset('stisla/js/modules/jquery.min.js') }}"></script>
+
+        <script>
+            $(window).ready(function(){
+                if (Boolean(sessionStorage.getItem('sidebar-toggle-collapsed'))) {
+                    $('#bodynya').toggleClass('sidebar-mini', true);
+                }
+            });
+        </script>
     </head>
-    <body class="antialiased">
+    <body class="antialiased" id="bodynya">
         <div id="app">
             <div class="main-wrapper">
                 @include('components.navbar')
@@ -60,7 +69,6 @@
         @stack('modals')
 
         <!-- General JS Scripts -->
-        <script src="{{ asset('stisla/js/modules/jquery.min.js') }}"></script>
         <script defer async src="{{ asset('stisla/js/modules/popper.js') }}"></script>
         <script defer async src="{{ asset('stisla/js/modules/tooltip.js') }}"></script>
         <script src="{{ asset('stisla/js/modules/bootstrap.min.js') }}"></script>
@@ -83,7 +91,22 @@
             {{ $script }}
         @endisset
         @stack('scripts')
-
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#sidebar-wrapper").click();
+            });
+        </script>
+        <script>
+            // Click handler can be added latter, after jQuery is loaded...
+            $('#klik').click(function(event) {
+              event.preventDefault();
+              if (Boolean(sessionStorage.getItem('sidebar-toggle-collapsed'))) {
+                sessionStorage.setItem('sidebar-toggle-collapsed', '');
+              } else {
+                sessionStorage.setItem('sidebar-toggle-collapsed', '1');
+              }
+            });
+          </script>
         <script>
             // $("body").children().first().before($(".modal"));
         </script>

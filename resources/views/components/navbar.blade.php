@@ -6,7 +6,7 @@ $user = auth()->user();
 <nav class="navbar navbar-expand-lg main-navbar">
     <form class="form-inline mr-auto">
         <ul class="navbar-nav mr-3">
-            <li><a href="#" data-turbolinks="false" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+            <li><a href="#" data-turbolinks="false" data-toggle="sidebar" class="nav-link nav-link-lg" id="klik"><i class="fas fa-bars"></i></a></li>
         </ul>
         <h1 class="font-weight-bold text-2xl text-white">{{ config('app.name', 'Laravel') }}</h1>
     </form>

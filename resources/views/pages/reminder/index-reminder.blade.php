@@ -19,9 +19,11 @@
 
         </div>
     </div>
+
+<x-slot name="script">
+    @livewireCalendarScripts
+</x-slot>
 </x-app-layout>
 
-@push('scripts')
-@livewireScripts
-@livewireCalendarScripts
-@endpush
+
+

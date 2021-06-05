@@ -29,17 +29,49 @@
             </button>
         </div>
     </div>
-
+    <div class="bg-orange-100 p-2">
+        <h1 class="text-lg font-medium">
+            Acara Tidak Terjadwal
+        </h1>
+        <div class="flex py-2">
+            @foreach($unscheduledEvents as $event)
+                <div
+                    class="shadow p-2 border rounded bg-white mr-2"
+                    ondragstart="onLivewireCalendarEventDragStart(event, '{{ $event->id }}')"
+                    draggable="true">
+                    <p class="font-medium text-sm">
+                        {{ $event->nama_kegiatan }}
+                    </p>
+                    <p class="text-xs">
+                        {{ $event->keterangan }}
+                    </p>
+                    <button
+                        wire:click.stop="deleteEvent({{ $event->id }})"
+                        type="button"
+                        class="mt-2 inline-flex items-center px-2 py-1 border border-transparent text-xs leading-4 font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-50 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150">
+                        Hapus
+                    </button>
+                </div>
+            @endforeach
+            @if($unscheduledEvents->isEmpty())
+                <p class="text-sm text-gray-700">
+                    Tidak ada acara yang ditemukan
+                </p>
+            @endif
+        </div>
+    </div>
     {{-- Modals --}}
     <div>
         <div>
             @if($isModalOpen)
-            <script>
-                console.log("modal kebuka");
-            </script>
+            @include('pages.reminder.create-reminder-modal')
                 {{-- @include('create-appointment-modal') --}}
             @endif
         </div>
-
+        <div>
+            @if($selectedReminder)
+                @include('pages.reminder.reminder-details-modal')
+            @endif
+        </div>
     </div>
 </div>
