@@ -42,7 +42,7 @@ $links = [
                 "section_icon" => "fas fa-clock",
                 "section_list" => [
                     ["href" => "reminder_index", "text" => "Lihat kalender"],
-                    ["href" => "reminder_index", "text" => "Manage Reminder"],
+                    ["href" => "manage_reminder", "text" => "Manage Reminder"],
                 ]
             ]
         ],

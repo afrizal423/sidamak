@@ -15,6 +15,16 @@ class Reminder extends Model
         'tgl_kegiatan',
         'keterangan',
         'waktu_kegiatan',
-        'priority'
+        'priority',
+        'days'
     ];
+
+    public static function search($query)
+    {
+        return empty($query) ? static::query()
+            : static::where('nama_kegiatan', 'like', '%'.$query.'%')
+            ->orWhere('tempat_acara', 'like', '%'.$query.'%')
+            ->orWhere('keterangan', 'like', '%'.$query.'%')
+            ->orWhere('tgl_kegiatan', 'like', '%'.$query.'%');
+    }
 }

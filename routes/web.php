@@ -50,6 +50,8 @@ Route::group([ "middleware" => ['auth:sanctum', 'verified'] ], function() {
         Route::view('pegawai/ubahpegawai/{pegawaiId}', "pages.pegawai.edit-pegawai")->name('ubah_pegawai');
 
         Route::view('reminder', "pages.reminder.index-reminder")->name('reminder_index');
+        Route::view('reminder/manage', "pages.reminder.manage-reminder")->name('manage_reminder');
+
 
     });
 
