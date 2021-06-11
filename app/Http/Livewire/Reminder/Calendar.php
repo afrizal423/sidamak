@@ -12,7 +12,7 @@ use Carbon\Carbon;
 class Calendar extends LivewireCalendar
 {
     public $isModalOpen = false;
-    public $newReminder;
+    public $newReminder, $isUpdate;
     public $selectedReminder = null;
 
     public function events() : Collection

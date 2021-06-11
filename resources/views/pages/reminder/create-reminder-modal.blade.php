@@ -102,12 +102,21 @@
 
         <div class="mt-5 sm:mt-6    sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
             <div class="flex w-full rounded-md shadow-sm sm:col-start-2">
+                @if ($isUpdate)
+                <button
+                    type="button"
+                    wire:click.prevent="updateReminder"
+                    class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                    Ubah
+                </button>
+                @else
                 <button
                     type="button"
                     wire:click.prevent="saveReminder"
                     class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                     Konfirmasi
                 </button>
+                @endif
             </div>
             <div class="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:col-start-1">
                 {{-- <button

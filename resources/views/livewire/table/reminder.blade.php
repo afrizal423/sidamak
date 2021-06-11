@@ -2,6 +2,27 @@
     {{-- Nothing in the world is as soft and yielding as water. --}}
     <x-data-table-custom :model="$reminders">
         <x-slot name="inputdata">
+            <div style="padding: 20px">
+                @if(session()->has('success'))
+                <script>
+                Swal.fire(
+                        'Berhasil!',
+                        'Data telah tersimpan di database.',
+                        'success'
+                    );
+                </script>
+                @endif
+
+                @if(session()->has('error'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session()->get('error') }}
+                    </div>
+                @endif
+
+                      <a href="" class="-ml- btn btn-primary shadow-none" wire:click.prevent="tambah()">
+                        <span class="fas fa-plus"></span> Tambah Data
+                    </a>
+            </div>
         </x-slot>
         <x-slot name="head">
             <tr>
@@ -44,4 +65,10 @@
             @endforeach
         </x-slot>
     </x-data-table-custom>
+    <div>
+        @if($isModalOpen)
+        @include('pages.reminder.create-reminder-modal')
+            {{-- @include('create-appointment-modal') --}}
+        @endif
+    </div>
 </div>
