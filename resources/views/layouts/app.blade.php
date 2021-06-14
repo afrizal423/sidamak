@@ -33,13 +33,6 @@
         <script defer src="{{ asset('vendor/alpine.js') }}"></script>
         <script src="{{ asset('stisla/js/modules/jquery.min.js') }}"></script>
 
-        <script>
-            $(window).ready(function(){
-                if (Boolean(sessionStorage.getItem('sidebar-toggle-collapsed'))) {
-                    $('#bodynya').toggleClass('sidebar-mini', true);
-                }
-            });
-        </script>
     </head>
     <body class="antialiased" id="bodynya">
         <div id="app">
@@ -91,10 +84,20 @@
             {{ $script }}
         @endisset
         @stack('scripts')
-        <script type="text/javascript">
-            $(document).ready(function(){
-                $("#sidebar-wrapper").click();
+        <script>
+            $(window).ready(function(){
+                if (Boolean(sessionStorage.getItem('sidebar-toggle-collapsed'))) {
+                    $('#bodynya').toggleClass('sidebar-mini', true);
+                    // $("#klik").click();
+                    // document.getElementById('klik').click();
+                    var d = document.getElementById("dropdown-menu");
+                    d.style.display = "none";
+                } else {
+                    var d = document.getElementById("dropdown-menu");
+                    d.style.display = "block";
+                }
             });
+            // style="overflow: hidden; outline: none; cursor: auto; touch-action: auto;"
         </script>
         <script>
             // Click handler can be added latter, after jQuery is loaded...

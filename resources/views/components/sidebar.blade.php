@@ -82,7 +82,7 @@ $navigation_links = array_to_object($links);
 
                     <li class="nav-item dropdown {{ ($is_active) ? 'active' : '' }}">
                         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="{{ $section->section_icon }}"></i> <span>{{ $section->section_text }}</span></a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu" {{ ($is_active) ? 'id=dropdown-menu' : '' }}>
                             @foreach ($section->section_list as $child)
                                 <li class="{{ Request::routeIs($child->href) ? 'active' : '' }}"><a class="nav-link" href="{{ route($child->href) }}">{{ $child->text }}</a></li>
                             @endforeach
@@ -121,7 +121,7 @@ tanpa loop php --}}
           <li class="menu-header">Starter</li>
           <li class="nav-item dropdown active">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" id="dropdown-menu">
               <li class="active"><a class="nav-link" href="layout-default.html">Default Layout</a></li>
               <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
               <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
