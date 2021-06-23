@@ -49,6 +49,21 @@ $links = [
         "text" => "Master Data",
         "is_multi" => true,
     ],
+    [
+        "href" => [
+            [
+                "section_text" => "Aduan",
+                "section_icon" => "fas fa-info",
+                "section_list" => [
+                    // ["href" => "user", "text" => "Data User"],
+                    ["href" => "aduan_index", "text" => "Tambah Aduan"],
+                    ["href" => "manage_aduan", "text" => "Manage Aduan"]
+                ]
+            ]
+        ],
+        "text" => "Menu",
+        "is_multi" => true,
+    ],
 ];
 $navigation_links = array_to_object($links);
 @endphp

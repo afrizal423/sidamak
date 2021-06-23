@@ -36,4 +36,13 @@ class Pegawai extends Model
     public function jenis_user(){
     	return $this->belongsTo(JenisUsers::class, 'id_jenis_user');
     }
+
+    public function keluhan(){
+    	return $this->hasMany(Keluhan::class);
+    }
+
+    public function PIC()
+    {
+        return $this->belongsToMany(Keluhan::class, 'keluhan_pegawai', 'id_pegawai', 'id_keluhan');
+    }
 }

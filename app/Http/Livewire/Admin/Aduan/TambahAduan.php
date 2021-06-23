@@ -1,0 +1,153 @@
+<?php
+
+namespace App\Http\Livewire\Admin\Aduan;
+
+use App\Models\Keluhan;
+use Livewire\Component;
+use App\Models\DivisiModels;
+use App\Models\Pegawai;
+
+class TambahAduan extends Component
+{
+    public $divisis, $divisi, $divisiss, $nama_pelapor, $keterangan;
+    public $action, $aduanId, $updateData;
+    /**
+     * Variable yang huruf 's'-nya satu itu buat mengeluarkan data semua (data master)
+     * Sedangkan variable yang huruf 's'-nya dua, itu buat parsing ke form ajax select2
+     */
+
+    /**
+     * UPDATE DATA
+     */
+    public $updateMode = false;
+    public $inputs = [];
+    public $dataBaru = [];
+    public $i = 1, $ii=1;
+    public $pic,$picnya, $hitungData, $pegawais, $datanya, $items;
+
+    // custom select
+    public string $searchText = '';
+    public array $selectedIds = [];
+
+    public function add($i)
+    {
+        $i = $i + 1;
+        $this->i = $i;
+        $this->ii = $i;
+        array_push($this->dataBaru ,$i);
+        // $this->hitungData->push($this->pic);
+    }
+    public function remove($i)
+    {
+        unset($this->datanya[$i]);
+        // unset($this->selectedIds[$i]); // ini buat data array yg baru
+        $this->i--;
+    }
+    public function removenew($i)
+    {
+        unset($this->dataBaru[$i]);
+        unset($this->selectedIds[$i]);
+        $this->i--;
+    }
+    public function choose($id)
+    {
+        $this->selectedIds[] = $id;
+    }
+    public function ambilDataPegawai($id)
+    {
+        $dt = Pegawai::find($this->selectedIds[$id]);
+        return $dt->nama_pegawai;
+    }
+
+     /**
+      * END UPDATE DATA
+      */
+
+    private function resetInputFields(){
+        $this->nama_divisi = '';
+        $this->nama_pelapor  = '';
+        $this->keterangan  = '';
+    }
+
+    public function ubah()
+    {
+        # code...
+        // dd($this->selectedIds);
+        dd($this->hitungData);
+
+    }
+
+    public function save()
+    {
+        $this->validate([
+            'divisi' => 'required',
+            'nama_pelapor' => 'required|min:3|max:20',
+            'keterangan' => 'required|min:3',
+        ]);
+        try {
+            $kel = new Keluhan();
+            $kel->nama_pelapor = $this->nama_pelapor;
+            $kel->keterangan = $this->keterangan;
+            $kel->save();
+
+            // Set Flash Message
+            session()->flash('success');
+
+            // Reset Form Fields After Creating Category
+            $this->resetInputFields();
+        } catch (\Throwable $th) {
+            // Set Flash Message
+            session()->flash('error',$th);
+
+            // Reset Form Fields After Creating Category
+            $this->resetInputFields();
+
+        }
+        $this->resetInputFields();
+    }
+
+    public function mount()
+    {
+        $this->divisis = DivisiModels::all();
+        $this->pegawais = Pegawai::all();
+        if ($this->action == "ubahAduan" && $this->aduanId != null) {
+            $this->updateData = Keluhan::find($this->aduanId);
+            $this->divisiss = $this->updateData->id_divisi;
+            $this->nama_pelapor = $this->updateData->nama_pelapor;
+            $this->keterangan = $this->updateData->keterangan;
+
+            $this->inputs = $this->updateData;
+            $this->hitungData = $this->updateData->pic;
+            $this->datanya = $this->updateData->pic;
+            if (count($this->hitungData) > 0) {
+                # code...
+                $this->i = count($this->hitungData);
+            }
+            foreach ($this->updateData->pic as $key => $value) {
+                # code...
+                // $this->selectedIds[] = $value->keluhan_pic->id_pegawai; // ini buat data array yg baru kalo jadi
+            }
+            // echo json_encode($this->inputs);
+
+        }
+    }
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName, [
+            'divisi' => 'required',
+            'nama_pelapor' => 'required|min:3|max:20',
+            'keterangan' => 'required|min:3',
+        ]);
+    }
+
+    public function render()
+    {
+        $this->items = Pegawai::query()
+            ->where('nama_pegawai', 'like', "%$this->searchText%")
+            ->whereNotIn('id', $this->selectedIds)
+            ->limit(10)
+            ->get();
+        return view('livewire.admin.aduan.tambah-aduan');
+    }
+}

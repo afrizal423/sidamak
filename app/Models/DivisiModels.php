@@ -22,4 +22,8 @@ class DivisiModels extends Model
     public function pegawai(){
     	return $this->hasMany(Pegawai::class);
     }
+
+    public function keluhan(){
+    	return $this->hasMany(Keluhan::class);
+    }
 }

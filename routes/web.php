@@ -52,6 +52,10 @@ Route::group([ "middleware" => ['auth:sanctum', 'verified'] ], function() {
         Route::view('reminder', "pages.reminder.index-reminder")->name('reminder_index');
         Route::view('reminder/manage', "pages.reminder.manage-reminder")->name('manage_reminder');
 
+        Route::view('aduan', "pages.aduan.index-aduan")->name('aduan_index');
+        Route::view('aduan/manage', "pages.aduan.manage-aduan")->name('manage_aduan');
+        Route::view('aduan/ubahaduan/{aduanId}', "pages.aduan.edit-aduan")->name('ubah_aduan');
+
 
     });
 

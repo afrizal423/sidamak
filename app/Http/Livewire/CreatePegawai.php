@@ -69,7 +69,7 @@ class CreatePegawai extends Component
 
             // Reset Form Fields After Creating Category
             $this->resetInputFields();
-            $this->emit('saved');
+            // $this->emit('saved');
             // return redirect()->route('dtpegawai');
             // return redirect('/pesan')->with(['warning' => 'Pesan Warning']);
 
