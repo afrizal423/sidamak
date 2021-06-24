@@ -37,7 +37,7 @@
                     <td>
                         <ul>
                             @foreach ( $aduan->pic as $picnya)
-                            <li style="list-style-type: circle;">{{ $picnya->keluhan_pic->id_pegawai }}</li>
+                            <li style="list-style-type: circle;">{{ $picnya->nama_pegawai }}</li>
                             @endforeach
                         </ul>
                     </td>

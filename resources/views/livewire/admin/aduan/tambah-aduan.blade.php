@@ -8,7 +8,7 @@
                     'success'
                 ).then(function (result) {
                 if (true) {
-                    window.location = "{{ route('dashboard_admin') }}";
+                    window.location = "{{ route('manage_aduan') }}";
                 }
                 });
             </script>
@@ -59,7 +59,7 @@
                     </div>
                     <div class="col-md-2">
                         <button class="btn text-white btn-info btn-sm" wire:click.prevent="add({{$i}})">Tambah PIC Baru</button>
-                    </div> {{$i}}
+                    </div>
                 </div>
                 @error('pic.0') <span class="text-danger error">{{ $message }}</span>@enderror
             </div>
@@ -208,6 +208,7 @@
         $('#select2-dropdown').val({{ $divisiss }}); // Select the option with a value of '1'
         $('#select2-dropdown').trigger('change'); // Notify any JS components that the value changed
         @this.set('divisi', {{ $divisiss }});
+        // @this.set('picnya', {{ $divisiss }});
         // @this.set('selectedIds.0', {{ $divisiss }});
 
 
@@ -233,7 +234,12 @@
         @this.set('pic.{{$key}}', {{ $value->keluhan_pic->id_pegawai }});
 
                 // {{$key}} - {{$value->keluhan_pic->id_pegawai}}
+         $('#select2-dropdown-{{$key}}').on('change', function (e) {
+            var pic = $('#select2-dropdown-{{$key}}').select2("val");
+            @this.set('pic.{{$key}}', pic);
 
+            console.log(pic);
+        });
         @endforeach
 
         @endif // end if update

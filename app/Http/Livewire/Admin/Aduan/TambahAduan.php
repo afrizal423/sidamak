@@ -40,6 +40,9 @@ class TambahAduan extends Component
     public function remove($i)
     {
         unset($this->datanya[$i]);
+        // $pos = array_search($this->pic[$i], $this->selectedIds);
+        unset($this->pic[$i]);
+        // dd($pos);
         // unset($this->selectedIds[$i]); // ini buat data array yg baru
         $this->i--;
     }
@@ -72,8 +75,21 @@ class TambahAduan extends Component
     public function ubah()
     {
         # code...
-        // dd($this->selectedIds);
-        dd($this->hitungData);
+        foreach ($this->pic as $key => $value) {
+            # code...
+            $this->selectedIds[] = $value; // ini buat data array yg baru kalo jadi
+        }
+        // $this->selectedIds[] = $this->pic;
+        $ad = Keluhan::find($this->aduanId);
+        $ad->id_divisi = $this->divisi;
+        $ad->nama_pelapor = $this->nama_pelapor;
+        $ad->keterangan = $this->keterangan;
+        $ad->save();
+        //update relasi
+        $ad->pic()->sync($this->selectedIds);
+        session()->flash('success');
+        // dd();
+        // dd($this->hitungData);
 
     }
 
@@ -86,6 +102,7 @@ class TambahAduan extends Component
         ]);
         try {
             $kel = new Keluhan();
+            $kel->id_divisi = $this->divisi;
             $kel->nama_pelapor = $this->nama_pelapor;
             $kel->keterangan = $this->keterangan;
             $kel->save();
