@@ -228,6 +228,17 @@
         // disini
         $('{{$id}}').select2();
 
+        @if (count($inputs->pic) == 0)
+            // console.log("asdasd");
+            // {{count($inputs->pic)}}
+            $('#select2-dropdown-0').on('change', function (e) {
+                var pic = $('#select2-dropdown-0').select2("val");
+                @this.set('pic.0', pic);
+
+                console.log(pic);
+            });
+        @endif
+
         @foreach ($inputs->pic as $key => $value)
         $('#select2-dropdown-{{$key}}').val({{ $value->keluhan_pic->id_pegawai }}); // Select the option with a value of '1'
         $('#select2-dropdown-{{$key}}').trigger('change'); // Notify any JS components that the value changed
@@ -242,7 +253,7 @@
         });
         @endforeach
 
-        @endif // end if update
+        @endif // end if updatess
 
         $('#select2-dropdown').on('change', function (e) {
             var divisi = $('#select2-dropdown').select2("val");

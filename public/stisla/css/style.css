@@ -1536,10 +1536,34 @@ h6 .badge {
   top: 0;
   left: 0;
   width: 100%;
-  height: 115px;
-  background-color: #6777ef;
+  height: 165px;
+  background-color: #186fb7;
   z-index: -1; }
-
+  .navbar-bg::before, .navbar-bg::after{
+    border-bottom: 2px solid #f9f9f9;
+  }
+  .navbar-bg::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 10px;
+    background-size: 20px 40px;
+    background-image:
+      radial-gradient(circle at 10px -15px, transparent 20px, #f9f9f9 21px);
+  }
+  .navbar-bg::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 15px;
+    background-size: 40px 40px;
+    background-image:
+      radial-gradient(circle at 10px 26px, #f9f9f9 20px, transparent 21px);
+  }
 .navbar {
   align-items: center; }
   .navbar .navbar-brand {
