@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Pegawai;
+use App\Events\NewAduan;
 use App\Http\Livewire\Jenisuser;
 use App\Http\Livewire\UnitKerja;
 use App\Http\Livewire\Pegawai\Index;
@@ -31,6 +32,12 @@ Route::get('/', FormAduan::class)->name('landing');
  * <x-public-layout>
  * </x-public-layout>
  */
+
+Route::get('/aduan', function() {
+    dd(broadcast(new NewAduan('coba')));
+
+    return true;
+  });
 
 Route::group([ "middleware" => ['auth:sanctum', 'verified'] ], function() {
     // Route::view('/dashboard', "dashboard")->name('dashboard');

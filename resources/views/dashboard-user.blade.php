@@ -9,7 +9,9 @@
     </x-slot>
 
     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-        <div class="container">
+        <livewire:user.dashboard-user
+            />
+        {{-- <div class="container">
             <div class="row">
               <div class="col-sm">
                 One of three columns
@@ -21,6 +23,6 @@
                 One of three columns
               </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </x-app-layout>
