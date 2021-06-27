@@ -1,13 +1,14 @@
 <?php
 
+use App\Models\Pegawai;
+use App\Http\Livewire\Jenisuser;
+use App\Http\Livewire\UnitKerja;
+use App\Http\Livewire\Pegawai\Index;
+use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Public\FormAduan;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DivisiController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\UnitKerja;
-use App\Http\Livewire\Jenisuser;
-use App\Http\Livewire\Pegawai\Index;
 use App\Http\Livewire\Pegawai\Tambahpegawai;
-use App\Models\Pegawai;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +21,16 @@ use App\Models\Pegawai;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', FormAduan::class)->name('landing');
+// Route::view('/', "livewire.public.form-aduan")->name('landing');
+/**
+ * Jika menggunakan route view, pastikan di layoutnya sudah memakai tag
+ * <x-public-layout>
+ * </x-public-layout>
+ */
 
 Route::group([ "middleware" => ['auth:sanctum', 'verified'] ], function() {
     // Route::view('/dashboard', "dashboard")->name('dashboard');
