@@ -23,7 +23,7 @@ class TambahAduan extends Component
     public $inputs = [];
     public $dataBaru = [];
     public $i = 1, $ii=1;
-    public $pic,$picnya, $hitungData, $pegawais, $datanya, $items;
+    public $pic,$picnya, $hitungData, $pegawais, $datanya, $items, $nama_divisi;
 
     // custom select
     public string $searchText = '';
@@ -72,6 +72,7 @@ class TambahAduan extends Component
         $this->keterangan  = '';
     }
 
+
     public function ubah()
     {
         # code...
@@ -91,6 +92,26 @@ class TambahAduan extends Component
         // dd();
         // dd($this->hitungData);
 
+    }
+    public function ubahFormUser($i)
+    {
+        if ($i != 'alphine') {
+            # code...
+            foreach ($this->pic as $key => $value) {
+                # code...
+                $this->selectedIds[] = $value; // ini buat data array yg baru kalo jadi
+            }
+        }
+        // $this->selectedIds[] = $this->pic;
+        $ad = Keluhan::find($this->aduanId);
+        $ad->id_divisi = $this->divisi;
+        $ad->nama_pelapor = $this->nama_pelapor;
+        $ad->keterangan = $this->keterangan;
+        $ad->status = 1;
+        $ad->save();
+        //update relasi
+        $ad->pic()->sync($this->selectedIds);
+        session()->flash('success_user');
     }
 
     public function save()
@@ -127,8 +148,9 @@ class TambahAduan extends Component
     {
         $this->divisis = DivisiModels::all();
         $this->pegawais = Pegawai::all();
-        if ($this->action == "ubahAduan" && $this->aduanId != null) {
+        if ($this->action == "ubahAduan" || $this->action == "ubahAduanUser" && $this->aduanId != null) {
             $this->updateData = Keluhan::find($this->aduanId);
+            $this->nama_divisi = $this->updateData->divisi->nama_divisi;
             $this->divisiss = $this->updateData->id_divisi;
             $this->nama_pelapor = $this->updateData->nama_pelapor;
             $this->keterangan = $this->updateData->keterangan;

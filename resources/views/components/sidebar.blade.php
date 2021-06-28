@@ -66,8 +66,8 @@ $links = [
     ],
 ];
 $navigation_links = array_to_object($links);
+$user = auth()->user();
 @endphp
-
 <div class="main-sidebar">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
@@ -89,6 +89,8 @@ $navigation_links = array_to_object($links);
                 <a class="nav-link" href="{{ route($link->href) }}"><i class="fas fa-fire"></i><span>Dashboard</span></a>
             </li>
             @else
+                @if ($user->roles == 0)
+
                 @foreach ($link->href as $section)
                     @php
                     $routes = collect($section->section_list)->map(function ($child) {
@@ -107,6 +109,8 @@ $navigation_links = array_to_object($links);
                         </ul>
                     </li>
                 @endforeach
+
+                @endif
             @endif
         </ul>
         @endforeach

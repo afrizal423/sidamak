@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Public;
 
 use App\Models\Keluhan;
 use Livewire\Component;
+use App\Events\NewAduan;
 use App\Models\DivisiModels;
 
 class FormAduan extends Component
@@ -45,6 +46,7 @@ class FormAduan extends Component
 
             // Reset Form Fields After Creating Category
             $this->resetInputFields();
+            broadcast(new NewAduan('aduan baru'));
         } catch (\Throwable $th) {
             // Set Flash Message
             session()->flash('error',$th);
