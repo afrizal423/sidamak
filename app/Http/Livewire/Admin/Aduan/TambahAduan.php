@@ -104,7 +104,7 @@ class TambahAduan extends Component
         }
         // $this->selectedIds[] = $this->pic;
         $ad = Keluhan::find($this->aduanId);
-        $ad->id_divisi = $this->divisi;
+        $ad->id_divisi = $this->divisiss;
         $ad->nama_pelapor = $this->nama_pelapor;
         $ad->keterangan = $this->keterangan;
         $ad->status = 1;
