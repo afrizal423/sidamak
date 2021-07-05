@@ -235,6 +235,47 @@
             <button type="submit" class="btn btn-primary" wire:click.prevent="ubah()">Simpan Perubahan</button>
             @elseif ($action == "ubahAduanUser")
             <br>
+            <div class="form-group"
+                x-data="{issVisible: false}"
+                @click.away="issVisible = false">
+                <div class="row">
+                    <div class="col-md-10">
+                        <label for="nampeg">Nama yang menerima laporan</label>
+                        @if ($nama_anggota==0)
+                        <input type="text" class="form-control" aria-describedby="nampeg"
+                        wire:model="searchText"
+                        @focus="issVisible = true"
+                        type="text">
+
+                        <div
+                                x-show="issVisible"
+                                style="display: none"
+                                class="card absolute w-full max-h-40 overflow-scroll border-b border-gray-300 overscroll-contain">
+                            @foreach($items as $pegawai)
+                                <div
+                                    class="w-full bg-gray-100 p-1 mb-1 rounded-md hover:bg-gray-200 cursor-pointer pl-2 font-semibold"
+                                    wire:click="pilihAnggota({{$pegawai->id}})"
+                                    @click="issVisible = false"
+                                >
+                                    {{$pegawai->nama_pegawai}}
+                                </div>
+                            @endforeach
+                        </div>
+                        @else
+                        <br>
+                        <span>{{ $this->ambilDataPegawai($keys,true) }}</span>
+
+                        @endif
+                        {{-- <small id="nampeg" class="form-text text-muted">Silahkan isi nama pelapor.</small> --}}
+                        @error('nama_pelapor') <span class="text-danger error">{{ $message }}</span>@enderror
+                        {{-- {{ empty($selectedIds[$keys]) ? "" : $keys }} --}}
+                    </div>
+                    <div class="col-md-2">
+                        {{-- <button class="btn btn-danger btn-sm" wire:click.prevent="removenew({{ $keys }})">Hapus PIC</button>                        </div> --}}
+                </div>
+                @error('picnya.{{$keys}}') <span class="text-danger error">{{ $message }}</span>@enderror
+            </div>
+            <br>
             <button type="submit" class="btn btn-primary" wire:click.prevent="ubahFormUser('alphine')">Simpan Data Aduan</button>
             @else
             <button type="submit" class="btn btn-primary" wire:click.prevent="save()">Simpan Data</button>

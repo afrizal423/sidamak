@@ -31,7 +31,7 @@
         </x-slot>
         <x-slot name="body">
             @foreach ($aduans as $aduan)
-                <tr x-data="window.__controller.dataTableController({{ $aduan->id }})">
+                <tr x-data="window.__controller.dataTableController({{ $aduan->id }})" style="color: {{$aduan->status == 3 ? "rgb(255, 0, 119)" : ""}}">
                     <td>{{ $aduan->id }}</td>
                     <td>{{ $aduan->nama_pelapor }}</td>
                     <td>
@@ -41,7 +41,7 @@
                             @endforeach
                         </ul>
                     </td>
-                    <td>{{ $aduan->status == 0 ? "Belum Dikerjakan" : ($aduan->status == 3 ? "Pending" : "Sudah Dikerjakan") }}</td>
+                    <td>{{ $aduan->status == 0 ? "Belum Dikerjakan" : ($aduan->status == 3 ? "Pending" : ($aduan->status == 2 ? "Progress" : "Sudah Dikerjakan")) }}</td>
                     <td>{{ Carbon\Carbon::parse($aduan->tgl_dibuat)->isoFormat('LLLL') }}</td>
                     <td class="whitespace-no-wrap row-action--icon">
                         <a role="button" wire:click.prevent="lihat({{ $aduan->id }})" class="mr-3"><i class="fa fa-16px fa-info"></i></a>

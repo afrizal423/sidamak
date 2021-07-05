@@ -57,7 +57,29 @@ $links = [
                 "section_list" => [
                     // ["href" => "user", "text" => "Data User"],
                     ["href" => "aduan_index", "text" => "Tambah Aduan"],
-                    ["href" => "manage_aduan", "text" => "Manage Aduan"]
+                    ["href" => "manage_aduan", "text" => "Manage Aduan"],
+                    ["href" => "progress_aduan", "text" => "Progress Aduan"]
+                ]
+            ]
+        ],
+        "text" => "Menu",
+        "is_multi" => true,
+    ],
+];
+$links_user = [
+    [
+        "href" => "dashboard",
+        "text" => "Dashboard",
+        "is_multi" => false,
+    ],
+    [
+        "href" => [
+            [
+                "section_text" => "Aduan",
+                "section_icon" => "fas fa-info",
+                "section_list" => [
+                    // ["href" => "user", "text" => "Data User"],
+                    ["href" => "progress_aduan_user", "text" => "Progress Aduan"]
                 ]
             ]
         ],
@@ -66,8 +88,10 @@ $links = [
     ],
 ];
 $navigation_links = array_to_object($links);
+$navigation_links_user = array_to_object($links_user);
 $user = auth()->user();
 @endphp
+@if ($user->roles == 0)
 <div class="main-sidebar">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
@@ -89,7 +113,6 @@ $user = auth()->user();
                 <a class="nav-link" href="{{ route($link->href) }}"><i class="fas fa-fire"></i><span>Dashboard</span></a>
             </li>
             @else
-                @if ($user->roles == 0)
 
                 @foreach ($link->href as $section)
                     @php
@@ -110,12 +133,60 @@ $user = auth()->user();
                     </li>
                 @endforeach
 
-                @endif
             @endif
         </ul>
         @endforeach
     </aside>
 </div>
+@elseif ($user->roles == 1)
+<div class="main-sidebar">
+    <aside id="sidebar-wrapper">
+        <div class="sidebar-brand">
+            <a href="{{ route('dashboard') }}">
+                <img class="d-inline-block" width="190px" height="140.61px" src="{{ asset('img/logo-pelindo-2.png') }}" alt=""
+                style="padding-bottom: 100px">
+            </a>
+        </div>
+        <div class="sidebar-brand sidebar-brand-sm">
+            <a href="{{ route('dashboard') }}">
+                <img class="d-inline-block" width="50px" height="40.61px" src="{{ asset('img/logo-pelindo.png') }}" alt="">
+            </a>
+        </div>
+        @foreach ($navigation_links_user as $link)
+        <ul class="sidebar-menu">
+            <li class="menu-header">{{ $link->text }}</li>
+            @if (!$link->is_multi)
+            <li class="{{ Request::routeIs($link->href) ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route($link->href) }}"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+            </li>
+            @else
+
+                @foreach ($link->href as $section)
+                    @php
+                    $routes = collect($section->section_list)->map(function ($child) {
+                        return Request::routeIs($child->href);
+                    })->toArray();
+
+                    $is_active = in_array(true, $routes);
+                    @endphp
+
+                    <li class="nav-item dropdown {{ ($is_active) ? 'active' : '' }}">
+                        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="{{ $section->section_icon }}"></i> <span>{{ $section->section_text }}</span></a>
+                        <ul class="dropdown-menu" {{ ($is_active) ? 'id=dropdown-menu' : '' }}>
+                            @foreach ($section->section_list as $child)
+                                <li class="{{ Request::routeIs($child->href) ? 'active' : '' }}"><a class="nav-link" href="{{ route($child->href) }}">{{ $child->text }}</a></li>
+                            @endforeach
+                        </ul>
+                    </li>
+                @endforeach
+
+            @endif
+        </ul>
+        @endforeach
+    </aside>
+</div>
+@endif
+
 
 {{-- code dibawah ini untuk perubahan sidebar ke html biasa
 tanpa loop php --}}

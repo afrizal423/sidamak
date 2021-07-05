@@ -24,6 +24,7 @@ class TambahAduan extends Component
     public $dataBaru = [];
     public $i = 1, $ii=1;
     public $pic,$picnya, $hitungData, $pegawais, $datanya, $items, $nama_divisi;
+    public $nama_anggota;
 
     // custom select
     public string $searchText = '';
@@ -56,9 +57,18 @@ class TambahAduan extends Component
     {
         $this->selectedIds[] = $id;
     }
-    public function ambilDataPegawai($id)
+    public function pilihAnggota($id)
     {
-        $dt = Pegawai::find($this->selectedIds[$id]);
+        $this->nama_anggota = $id;
+    }
+    public function ambilDataPegawai($id,$anggota=null)
+    {
+        if ($anggota) {
+            $dt = Pegawai::find($this->nama_anggota);
+        } else {
+            $dt = Pegawai::find($this->selectedIds[$id]);
+        }
+        // $dt = Pegawai::find($this->selectedIds[$id]);
         return $dt->nama_pegawai;
     }
 
@@ -105,9 +115,10 @@ class TambahAduan extends Component
         // $this->selectedIds[] = $this->pic;
         $ad = Keluhan::find($this->aduanId);
         $ad->id_divisi = $this->divisiss;
+        $ad->id_pegawai = $this->nama_anggota;
         $ad->nama_pelapor = $this->nama_pelapor;
         $ad->keterangan = $this->keterangan;
-        $ad->status = 1;
+        $ad->status = 2;
         $ad->save();
         //update relasi
         $ad->pic()->sync($this->selectedIds);
