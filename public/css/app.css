@@ -13,6 +13,9 @@
     margin-top: 0 !important;
 }
 
-textarea.form-control {
+/*
+    di nonaktifkan karena textarea pada modal tidak responsive
+*/
+/* textarea.form-control {
     height: 64px !important;
-}
+} */

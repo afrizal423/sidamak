@@ -24,7 +24,7 @@ class TambahAduan extends Component
     public $dataBaru = [];
     public $i = 1, $ii=1;
     public $pic,$picnya, $hitungData, $pegawais, $datanya, $items, $nama_divisi;
-    public $nama_anggota;
+    public $nama_anggota, $solusi;
 
     // custom select
     public string $searchText = '';
@@ -95,10 +95,18 @@ class TambahAduan extends Component
         $ad->id_divisi = $this->divisi;
         $ad->nama_pelapor = $this->nama_pelapor;
         $ad->keterangan = $this->keterangan;
+        $ad->solusi = $this->solusi;
         $ad->save();
         //update relasi
         $ad->pic()->sync($this->selectedIds);
-        session()->flash('success');
+        if ($this->action == 'ubahAduanPenanganan') {
+            # code...
+            session()->flash('success_penanganan');
+        } else {
+            # code...
+            session()->flash('success');
+        }
+
         // dd();
         // dd($this->hitungData);
 
@@ -159,12 +167,13 @@ class TambahAduan extends Component
     {
         $this->divisis = DivisiModels::all();
         $this->pegawais = Pegawai::all();
-        if ($this->action == "ubahAduan" || $this->action == "ubahAduanUser" && $this->aduanId != null) {
+        if ($this->action == "ubahAduan" || $this->action == "ubahAduanPenanganan" || $this->action == "ubahAduanUser" && $this->aduanId != null) {
             $this->updateData = Keluhan::find($this->aduanId);
             $this->nama_divisi = $this->updateData->divisi->nama_divisi;
             $this->divisiss = $this->updateData->id_divisi;
             $this->nama_pelapor = $this->updateData->nama_pelapor;
             $this->keterangan = $this->updateData->keterangan;
+            $this->solusi = $this->updateData->solusi;
 
             $this->inputs = $this->updateData;
             $this->hitungData = $this->updateData->pic;

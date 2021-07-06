@@ -81,8 +81,9 @@ Route::group([ "middleware" => ['auth:sanctum', 'verified'] ], function() {
         /**
          */
         Route::view('/', "dashboard-user")->name('dashboard_user'); // diubah lagi waktu selesai layouting user
-        Route::view('progressaduan', "pages.progress.progress-aduan")->name('progress_aduan_user');
-
+        Route::view('aduan/progressaduan', "pages.progress.progress-aduan")->name('progress_aduan_user');
+        Route::view('aduan/penanganaduan', "pages.aduan.penanganan-aduan")->name('penanganan_aduan_user');
+        Route::view('aduan/{aduanId}/ubahaduan', "pages.aduan.edit-aduan-user")->name('ubah_aduan_user');
         // Route::get('/', function () {
         //     return 'ini User ';
         // });

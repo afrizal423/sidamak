@@ -24,6 +24,18 @@
             }
             });
         </script>
+    @elseif (session()->has('success_penanganan'))
+    <script>
+        Swal.fire(
+                'Berhasil!',
+                'Data telah tersimpan di database.',
+                'success'
+            ).then(function (result) {
+            if (true) {
+                window.location = "{{ route('penanganan_aduan_user') }}";
+            }
+            });
+        </script>
     @endif
 
     <div class="card" style="padding: 20px">
@@ -79,7 +91,20 @@
                 @endif
                 @error('keterangan') <span class="text-danger error">{{ $message }}</span>@enderror
             </div>
-            @if ($action == "ubahAduan" || $action == "ubahAduanUser")
+            @if ($action == "ubahAduan" || $action == "ubahAduanPenanganan")
+            <div class="form-group">
+                <label for="altpeg">Solusi</label>
+                <textarea
+                        rows="5"
+                        class="border rounded p-2 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                        id="altpeg" aria-describedby="altpeg" wire:model.defer="solusi"
+                ></textarea>
+                {{-- <input type="text" > --}}
+                <small id="altpeg" class="form-text text-muted">Solusi cara mengatasi.</small>
+                @error('keterangan') <span class="text-danger error">{{ $message }}</span>@enderror
+            </div>
+            @endif
+            @if ($action == "ubahAduan" || $action == "ubahAduanUser" || $action == "ubahAduanPenanganan")
             @if ($action == "ubahAduanUser")
             @php
                 $keys=0;
@@ -231,7 +256,7 @@
                 @endphp
             @endforeach
             @endif
-            @if ($action == "ubahAduan")
+            @if ($action == "ubahAduan" || $action == "ubahAduanPenanganan")
             <button type="submit" class="btn btn-primary" wire:click.prevent="ubah()">Simpan Perubahan</button>
             @elseif ($action == "ubahAduanUser")
             <br>
@@ -290,7 +315,7 @@
     $(document).ready(function () {
         $('#select2-dropdown').select2();
 
-        @if ($action == "ubahAduan" || $action == "ubahAduanUser")
+        @if ($action == "ubahAduan" || $action == "ubahAduanUser" || $action == "ubahAduanPenanganan")
         $('#select2-dropdown').val({{ $divisiss }}); // Select the option with a value of '1'
         $('#select2-dropdown').trigger('change'); // Notify any JS components that the value changed
         @this.set('divisi', {{ $divisiss }});

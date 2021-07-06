@@ -65,18 +65,18 @@
                             @endforeach
 
                         </td>
-                        </tr>
                         <tr style="height: 18px;">
-                        <td style="width: 36.8883%; height: 18px;">Aduan</td>
-                        <td style="width: 63.1117%; height: 18px;">: {{$keterangan}}</td>
+                        <td style="width: 36.8883%; height: 18px;">Terlapor pada</td>
+                        <td style="width: 63.1117%; height: 18px;">: {{Carbon\Carbon::parse($dibuat_pada)->isoFormat('LLLL')}}</td>
+                        </tr>
                         </tr>
                         <tr style="height: 18px;">
                         <td style="width: 36.8883%; height: 18px;">Status</td>
                         <td style="width: 63.1117%; height: 18px;">: {{ $status == 2 ? "Sedang Berjalan / Progress" : ($status == 3 ? "Pending" : "") }}</td>
                         </tr>
                         <tr style="height: 18px;">
-                        <td style="width: 36.8883%; height: 18px;">Terlapor pada</td>
-                        <td style="width: 63.1117%; height: 18px;">: {{Carbon\Carbon::parse($dibuat_pada)->isoFormat('LLLL')}}</td>
+                        <td style="width: 36.8883%; height: 18px;">Aduan</td>
+                        <td style="width: 63.1117%; height: 18px;">: {{$keterangan}}</td>
                         </tr>
                         </tbody>
                     </table>

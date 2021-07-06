@@ -79,7 +79,8 @@ $links_user = [
                 "section_icon" => "fas fa-info",
                 "section_list" => [
                     // ["href" => "user", "text" => "Data User"],
-                    ["href" => "progress_aduan_user", "text" => "Progress Aduan"]
+                    ["href" => "progress_aduan_user", "text" => "Progress Aduan"],
+                    ["href" => "penanganan_aduan_user", "text" => "Penanganan Aduan"]
                 ]
             ]
         ],
