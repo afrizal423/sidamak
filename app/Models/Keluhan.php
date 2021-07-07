@@ -17,7 +17,9 @@ class Keluhan extends Model
         'solusi',
         'status',
         'id_divisi',
-        'id_pegawai'
+        'id_pegawai',
+        'is_done_solusi',
+        'is_approv'
     ];
 
     public function divisi(){

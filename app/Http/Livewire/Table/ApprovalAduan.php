@@ -6,7 +6,7 @@ use App\Models\Keluhan;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class PenangananAduan extends Component
+class ApprovalAduan extends Component
 {
     use WithPagination;
     public $model = Keluhan::class;
@@ -22,7 +22,29 @@ class PenangananAduan extends Component
 
     public $divisi, $nama_penerima, $nama_pelapor,$keterangan, $dibuat_pada, $status, $solusi;
     public $pic = [];
+    public $selectedtypes = [];
+    public $selectAll = false;
+
+    public function updatedSelectAll($id){
+        if ($id) {
+            $this->selectedtypes = $this->model::pluck('id');
+        } else {
+            $this->selectedtypes = [];
+        }
+
+    }
+    public function approv(){
+        $this->model::query()
+            ->whereIn('id',$this->selectedtypes)
+            ->update([
+                'is_approv' => true
+            ]);
+        $this->selectedtypes = [];
+        $this->selectAll = false;
+        session()->flash('success','Category Created Successfully!!');
+    }
     public function lihat($id){
+        // $this->approv();
         $this->singledata = $this->model::findOrFail($id);
         $this->divisi = $this->singledata->divisi->nama_divisi;
         $this->nama_penerima = $this->singledata->pegawai->nama_pegawai;
@@ -83,11 +105,12 @@ class PenangananAduan extends Component
                 $pegawai = $this->model::search($this->search)
                     ->where('status', '!=' , 0)
                     ->where('status', '!=' , 1)
+                    ->where('is_approv', '=' , 0)
                     ->orderBy('status', $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
 
                 return [
-                    "view" => 'livewire.table.penanganan-aduan',
+                    "view" => 'livewire.table.approval-aduan',
                     "aduans" => $pegawai
                 ];
                 break;
@@ -97,12 +120,10 @@ class PenangananAduan extends Component
                 break;
         }
     }
-
     public function render()
     {
-        // return view('livewire.table.status-progress');
         $data = $this->get_pagination_data();
-        // dd($data['progressnya']);
         return view($data['view'], $data);
+        // return view('livewire.table.approval-aduan');
     }
 }

@@ -1,7 +1,7 @@
 <x-app-layout>
     {{-- Close your eyes. Count to one. That is how long forever feels. --}}
     <x-slot name="header_content">
-        <h1>{{ __('Tambah Data Pegawai') }}</h1>
+        <h1>{{ __('Ubah Data Aduan') }}</h1>
 
         <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></div>

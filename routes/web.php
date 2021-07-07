@@ -70,8 +70,8 @@ Route::group([ "middleware" => ['auth:sanctum', 'verified'] ], function() {
         Route::view('aduan', "pages.aduan.index-aduan")->name('aduan_index');
         Route::view('aduan/manage', "pages.aduan.manage-aduan")->name('manage_aduan');
         Route::view('aduan/ubahaduan/{aduanId}', "pages.aduan.edit-aduan")->name('ubah_aduan');
-
-        Route::view('progressaduan', "pages.progress.progress-aduan")->name('progress_aduan');
+        Route::view('aduan/progressaduan', "pages.progress.progress-aduan")->name('progress_aduan');
+        Route::view('aduan/approvaladuan', "pages.aduan.approval-aduan")->name('approval_aduan');
 
 
 

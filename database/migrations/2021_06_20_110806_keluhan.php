@@ -23,6 +23,8 @@ class Keluhan extends Migration
             $table->dateTime('tgl_selesai')->nullable();
             $table->longText('solusi')->nullable();
             $table->boolean('status')->default(false);
+            $table->boolean('is_done_solusi')->default(false);
+            $table->boolean('is_approv')->default(false);
             $table->timestamps();
 
             $table->foreign('id_divisi')->references('id')->on('divisi')->onDelete('cascade')->onUpdate('cascade');

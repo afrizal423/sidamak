@@ -58,7 +58,8 @@ $links = [
                     // ["href" => "user", "text" => "Data User"],
                     ["href" => "aduan_index", "text" => "Tambah Aduan"],
                     ["href" => "manage_aduan", "text" => "Manage Aduan"],
-                    ["href" => "progress_aduan", "text" => "Progress Aduan"]
+                    ["href" => "progress_aduan", "text" => "Progress Aduan"],
+                    ["href" => "approval_aduan", "text" => "Approval Aduan"]
                 ]
             ]
         ],
