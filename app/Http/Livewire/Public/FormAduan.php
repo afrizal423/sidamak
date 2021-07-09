@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Public;
 
+use Carbon\Carbon;
 use App\Models\Keluhan;
 use Livewire\Component;
 use App\Events\NewAduan;
@@ -39,6 +40,7 @@ class FormAduan extends Component
             $kel->id_divisi = $this->divisi;
             $kel->nama_pelapor = $this->nama_pelapor;
             $kel->keterangan = $this->keterangan;
+            $kel->tgl_dibuat = Carbon::now();
             $kel->save();
 
             // Set Flash Message

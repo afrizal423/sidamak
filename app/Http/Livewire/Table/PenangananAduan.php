@@ -83,6 +83,7 @@ class PenangananAduan extends Component
                 $pegawai = $this->model::search($this->search)
                     ->where('status', '!=' , 0)
                     ->where('status', '!=' , 1)
+                    ->where('is_approv', '!=' , 1)
                     ->orderBy('status', $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
 

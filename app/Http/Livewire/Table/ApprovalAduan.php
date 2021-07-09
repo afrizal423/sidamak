@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Table;
 
+use Carbon\Carbon;
 use App\Models\Keluhan;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -37,7 +38,9 @@ class ApprovalAduan extends Component
         $this->model::query()
             ->whereIn('id',$this->selectedtypes)
             ->update([
-                'is_approv' => true
+                'is_approv' => true,
+                'status' => 1,
+                'tgl_selesai' => Carbon::now()
             ]);
         $this->selectedtypes = [];
         $this->selectAll = false;

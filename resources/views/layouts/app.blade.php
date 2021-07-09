@@ -62,7 +62,7 @@
         @stack('modals')
 
         <!-- General JS Scripts -->
-        <script defer async src="{{ asset('stisla/js/modules/popper.js') }}"></script>
+        <script src="{{ asset('stisla/js/modules/popper.js') }}"></script>
         <script defer async src="{{ asset('stisla/js/modules/tooltip.js') }}"></script>
         <script src="{{ asset('stisla/js/modules/bootstrap.min.js') }}"></script>
         <script defer src="{{ asset('stisla/js/modules/jquery.nicescroll.min.js') }}"></script>
@@ -72,6 +72,7 @@
         <script defer src="{{ asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
         <script defer src="{{ asset('stisla/js/modules/chart.min.js') }}"></script>
         <script defer src="{{ asset('vendor/select2/select2.min.js') }}"></script>
+
 
         <script src="{{ asset('stisla/js/stisla.js') }}"></script>
         <script src="{{ asset('stisla/js/scripts.js') }}"></script>
