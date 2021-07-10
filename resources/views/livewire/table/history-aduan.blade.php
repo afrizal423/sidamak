@@ -32,8 +32,8 @@
                               Pilih Ekstensi File
                             </button>
                             <div class="dropdown-menu">
-                              <a class="dropdown-item has-icon" href="#"><i class="fas fa-file-pdf" style="color: red"></i> PDF File</a>
-                              <a class="dropdown-item has-icon" href="#"><i class="fas fa-file-excel" style="color: green"></i> Excel File</a>
+                              <a class="dropdown-item has-icon" wire:click="exportPDF"><i class="fas fa-file-pdf" style="color: red"></i> PDF File</a>
+                              <a class="dropdown-item has-icon" wire:click="exportExcel"><i class="fas fa-file-excel" style="color: green"></i> Excel File</a>
                             </div>
                           </div>
                     </td>
@@ -57,6 +57,15 @@
             </tr>
         </x-slot>
         <x-slot name="body">
+            @if(session()->has('waiting'))
+            <script>
+            Swal.fire(
+                    'Berhasil request export PDF!',
+                    'Anda harus menunggu hingga proses selesai. <br> Jika proses telah selesai lihat pada notifikasi untuk mendownload file.',
+                    'info'
+                );
+            </script>
+            @endif
             @foreach ($progressnya as $aduan)
                 <tr x-data="window.__controller.dataTableController({{ $aduan->id }})" style="color: {{$aduan->status == 3 ? "rgb(255, 0, 119)" : ""}}">
                     <td>{{ $aduan->nama_pelapor }}</td>

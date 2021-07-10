@@ -80,9 +80,6 @@
             </button>
             </div>
             <div class="modal-body">
-                {{
-                    count($selectedtypes);
-                }}
                     <table style="border-collapse: collapse; width: 100%; height: 126px;" border="1">
                         <tbody>
                         <tr style="height: 18px;">

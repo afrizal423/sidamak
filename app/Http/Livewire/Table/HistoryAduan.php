@@ -2,10 +2,15 @@
 
 namespace App\Http\Livewire\Table;
 
+use App\Jobs\DownloadPDF;
 use Carbon\Carbon;
 use App\Models\Keluhan;
 use Livewire\Component;
+use Illuminate\Http\Request;
 use Livewire\WithPagination;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Storage;
+use stdClass;
 
 class HistoryAduan extends Component
 {
@@ -43,6 +48,28 @@ class HistoryAduan extends Component
     public function openModal()
     {
         $this->emit('show');
+    }
+    public function toPDF()
+    {
+        // $this->redirectRoute('pdf');
+        return redirect()->route('pdf',['mulaiTanggal'=>$this->mulaiTanggal,'sampaiTanggal'=>$this->sampaiTanggal]);
+    }
+    public function exportPDF()
+    {
+        // dd($request);
+        $dt = new stdClass();
+        $dt->mulaiTanggal = $this->mulaiTanggal;
+        $dt->sampaiTanggal = $this->sampaiTanggal;
+        $dt->user_id = auth()->user()->id;
+        // dd($dt);
+        DownloadPDF::dispatch($dt)->onQueue('downloadpdf');
+        // return with session waiting
+        session()->flash('waiting');
+        // return view('pages.export.topdf', [
+        //     'data' => $pegawai,
+        //     'mulaiTanggal' => $request->query('mulaiTanggal'),
+        //     'sampaiTanggal' => $request->query('sampaiTanggal')
+        // ]);
     }
 
     public function get_pagination_data ()

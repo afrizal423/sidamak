@@ -8,7 +8,9 @@ use App\Http\Livewire\Pegawai\Index;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Public\FormAduan;
 use App\Http\Controllers\UserController;
+use App\Http\Livewire\Table\HistoryAduan;
 use App\Http\Controllers\DivisiController;
+use App\Http\Livewire\Notifikasi;
 use App\Http\Livewire\Pegawai\Tambahpegawai;
 
 /*
@@ -89,6 +91,8 @@ Route::group([ "middleware" => ['auth:sanctum', 'verified'] ], function() {
         //     return 'ini User ';
         // });
     });
+
+    Route::get('export/pdf', [ Notifikasi::class, "exportPDF" ])->name('pdf');
 
     /**
      * Route manage users dihilangkan

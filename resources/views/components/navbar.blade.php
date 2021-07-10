@@ -14,6 +14,8 @@ $user = auth()->user();
         {{-- {{ config('app.name', 'Daily Activity Pelindo III') }} --}}
     </form>
     <ul class="navbar-nav navbar-right">
+        {{-- // load livewire --}}
+        @livewire('notifikasi')
         <li class="dropdown"><a href="#" data-turbolinks="false" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
             @if (!is_null($user))
                 <div class="d-sm-none d-lg-inline-block">Hi, {{ $user->nama }}</div></a>
