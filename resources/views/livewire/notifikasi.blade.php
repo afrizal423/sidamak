@@ -12,13 +12,20 @@
                   $textnya = json_decode($data->text);
               @endphp
             <a
-            @if ($data->type == 'exportpdf')
-                href="{{ route('pdf',['filenya' => $textnya->lokasi_file]) }}"
-            @endif
+            @switch($data->type)
+                @case('exportpdf')
+                    href="{{ route('pdf',['filenya' => $textnya->lokasi_file]) }}"
+                    @break
+                @case('exportexcel')
+                    href="{{ route('excel',['filenya' => $textnya->lokasi_file]) }}"
+                    @break
+                @default
+
+            @endswitch
             {{-- wire:click.prevent='test({{$data}})' --}}
             class="dropdown-item  @if ($data->is_read == false) dropdown-item-unread @endif  ">
               <div class="dropdown-item-icon bg-primary text-white">
-                <i class="fas fa-file-pdf"></i>
+                <i class="{{ $textnya->icon }}"></i>
               </div>
               <div class="dropdown-item-desc">
                 {{ $textnya->text }}

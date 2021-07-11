@@ -2,15 +2,18 @@
 
 namespace App\Http\Livewire\Table;
 
-use App\Jobs\DownloadPDF;
+use stdClass;
 use Carbon\Carbon;
 use App\Models\Keluhan;
 use Livewire\Component;
+use App\Jobs\DownloadPDF;
+use App\Jobs\DownloadExcel;
 use Illuminate\Http\Request;
 use Livewire\WithPagination;
 use Barryvdh\DomPDF\Facade as PDF;
+use App\Exports\LaporanAduanExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
-use stdClass;
 
 class HistoryAduan extends Component
 {
@@ -65,11 +68,22 @@ class HistoryAduan extends Component
         DownloadPDF::dispatch($dt)->onQueue('downloadpdf');
         // return with session waiting
         session()->flash('waiting');
-        // return view('pages.export.topdf', [
-        //     'data' => $pegawai,
-        //     'mulaiTanggal' => $request->query('mulaiTanggal'),
-        //     'sampaiTanggal' => $request->query('sampaiTanggal')
-        // ]);
+    }
+
+    public function exportExcel()
+    {
+        // dd($request);
+        $dt = new stdClass();
+        $dt->mulaiTanggal = $this->mulaiTanggal;
+        $dt->sampaiTanggal = $this->sampaiTanggal;
+        $dt->user_id = auth()->user()->id;
+        // // dd($dt);
+        DownloadExcel::dispatch($dt)->onQueue('downloadexcel');
+        // Excel::store(new LaporanAduanExport($dt), 'coba.xlsx');
+        // DownloadPDF::dispatch($dt)->onQueue('downloadpdf');
+        // // return with session waiting
+        session()->flash('waiting');
+        // return redirect()->route('excel',['mulaiTanggal'=>$this->mulaiTanggal,'sampaiTanggal'=>$this->sampaiTanggal]);
     }
 
     public function get_pagination_data ()

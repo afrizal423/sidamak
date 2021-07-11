@@ -67,6 +67,20 @@ class Notifikasi extends Component
         return Storage::download(Crypt::decryptString($request->query('filenya')));
     }
 
+    public function exportExcel(Request $request)
+    {
+        // Storage::download(Crypt::decryptString($request->query('filenya')));
+        // echo $request->query('filenya');
+        $id = ModelsNotifikasi::where('text', 'like', '%'.$request->query('filenya').'%')
+        ->first()->id;
+        $dt = ModelsNotifikasi::find($id);
+        $dt->is_read = true;
+        $dt->save();
+        // dd(Crypt::decryptString($request->query('filenya')));
+        broadcast(new EventsNotifikasi());
+        return Storage::download(Crypt::decryptString($request->query('filenya')));
+    }
+
     public function render()
     {
         $this->getResponDariSocket();
