@@ -99,7 +99,7 @@ $user = auth()->user();
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
             <a href="{{ route('dashboard') }}">
-                <img class="d-inline-block" width="190px" height="140.61px" src="{{ asset('img/logo-pelindo-2.png') }}" alt=""
+                <img class="d-inline-block" width="190px" height="140.61px" src="{{ asset('img/logo-pelindo-21.png') }}" alt=""
                 style="padding-bottom: 100px">
             </a>
         </div>

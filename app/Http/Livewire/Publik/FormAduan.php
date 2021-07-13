@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Public;
+namespace App\Http\Livewire\Publik;
 
 use Carbon\Carbon;
 use App\Models\Keluhan;
@@ -61,6 +61,6 @@ class FormAduan extends Component
     }
     public function render()
     {
-        return view('livewire.public.form-aduan')->layout('layouts.public.base');
+        return view('livewire.publik.form-aduan')->layout('layouts.public.base');
     }
 }

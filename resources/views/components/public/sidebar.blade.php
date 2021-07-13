@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #b8b7b7;">
     <a class="navbar-brand" href="#">
-        <img src="{{ asset('img/logo-pelindo-2.png') }}" width="200" height="100" class="d-inline-block align-top" alt="">
+        <img src="{{ asset('img/logo-pelindo-21.png') }}" width="200" height="100" class="d-inline-block align-top" alt="">
       </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

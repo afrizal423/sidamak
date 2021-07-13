@@ -7,7 +7,7 @@ use App\Http\Livewire\Jenisuser;
 use App\Http\Livewire\UnitKerja;
 use App\Http\Livewire\Pegawai\Index;
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Public\FormAduan;
+use App\Http\Livewire\Publik\FormAduan;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\Table\HistoryAduan;
 use App\Http\Controllers\DivisiController;
