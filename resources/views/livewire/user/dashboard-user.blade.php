@@ -19,6 +19,15 @@
     <div>
         nanti chart disini
     </div>
+    {!! Toastr::message() !!}
+    {{-- <script>
+        // toastr.info('Are you the 6 fingered man?');
+        toastr.success('We do have the Kapua suite available.', 'Turtle Bay Resort <a href="http://google.com" target="_blank" rel="noopener noreferrer"> woi</a>', {timeOut: 5000})
+        toastr.options.onShown = function() { console.log('hello'); }
+        toastr.options.onHidden = function() { console.log('goodbye'); }
+        toastr.options.onclick = function() { console.log('clicked'); }
+        toastr.options.onCloseClick = function() { console.log('close button clicked'); }
+        </script> --}}
     @endif
 </div>
 

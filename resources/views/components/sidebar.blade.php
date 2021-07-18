@@ -82,10 +82,20 @@ $links_user = [
                 "section_list" => [
                     // ["href" => "user", "text" => "Data User"],
                     ["href" => "progress_aduan_user", "text" => "Progress Aduan"],
-                    ["href" => "penanganan_aduan_user", "text" => "Penanganan Aduan"]
+                    ["href" => "penanganan_aduan_user", "text" => "Penanganan Aduan"],
+                    ["href" => "history_aduan_user", "text" => "History Aduan"]
+                ]
+            ],
+            [
+                "section_text" => "Reminder",
+                "section_icon" => "fas fa-clock",
+                "section_list" => [
+                    ["href" => "reminder_index_user", "text" => "Lihat kalender"],
+                    ["href" => "manage_reminder_user", "text" => "Manage Reminder"],
                 ]
             ]
         ],
+
         "text" => "Menu",
         "is_multi" => true,
     ],

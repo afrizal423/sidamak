@@ -2,11 +2,16 @@
 
 namespace App\Http\Livewire\Publik;
 
+use stdClass;
 use Carbon\Carbon;
 use App\Models\Keluhan;
 use Livewire\Component;
 use App\Events\NewAduan;
+use App\Models\Notifikasi;
 use App\Models\DivisiModels;
+use Illuminate\Support\Facades\Crypt;
+use App\Events\Notifikasi as EventsNotifikasi;
+
 
 class FormAduan extends Component
 {
@@ -49,6 +54,21 @@ class FormAduan extends Component
             // Reset Form Fields After Creating Category
             $this->resetInputFields();
             broadcast(new NewAduan('aduan baru'));
+
+            // notif
+            $dt = new stdClass();
+            $dt->text='Ada aduan masuk, silahkan ke halaman dashboard untuk mengerjakannya.';
+            $dt->url=Crypt::encryptString(route('dashboard_user'));
+            $dt->icon='fas fa-info';
+
+            $nt= new Notifikasi();
+            $nt->type='notifaduan';
+            $nt->text=json_encode($dt);
+            $nt->user_id=2;
+            $nt->save();
+            // disini panggil broadcast notifikasi
+            broadcast(new EventsNotifikasi());
+
         } catch (\Throwable $th) {
             // Set Flash Message
             session()->flash('error',$th);

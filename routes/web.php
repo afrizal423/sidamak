@@ -2,19 +2,20 @@
 
 use App\Models\Pegawai;
 use App\Events\NewAduan;
-use App\Exports\LaporanAduanExport;
+use Illuminate\Http\Request;
 use App\Http\Livewire\Jenisuser;
 use App\Http\Livewire\UnitKerja;
+use App\Http\Livewire\Notifikasi;
+use App\Exports\LaporanAduanExport;
 use App\Http\Livewire\Pegawai\Index;
+use Brian2694\Toastr\Facades\Toastr;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Publik\FormAduan;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\Table\HistoryAduan;
 use App\Http\Controllers\DivisiController;
-use App\Http\Livewire\Notifikasi;
 use App\Http\Livewire\Pegawai\Tambahpegawai;
-use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,10 +87,20 @@ Route::group([ "middleware" => ['auth:sanctum', 'verified'] ], function() {
     Route::group(['prefix' => 'dashboard/user', 'middleware' => ['Cek_login:user']], function(){
         /**
          */
+        // Route::get('/', function () {
+        //     Toastr::warning('Messages in here', 'Title <a href="http://google.com" target="_blank" rel="noopener noreferrer"> woi</a>', ["positionClass" => "toast-top-right"]);
+        //     return view('dashboard-user');;
+        // })->name('dashboard_user');
         Route::view('/', "dashboard-user")->name('dashboard_user'); // diubah lagi waktu selesai layouting user
         Route::view('aduan/progressaduan', "pages.progress.progress-aduan")->name('progress_aduan_user');
         Route::view('aduan/penanganaduan', "pages.aduan.penanganan-aduan")->name('penanganan_aduan_user');
         Route::view('aduan/{aduanId}/ubahaduan', "pages.aduan.edit-aduan-user")->name('ubah_aduan_user');
+        Route::view('aduan/history', "pages.aduan.history-aduan")->name('history_aduan_user');
+
+        Route::view('reminder', "pages.reminder.index-reminder")->name('reminder_index_user');
+        Route::view('reminder/manage', "pages.reminder.manage-reminder")->name('manage_reminder_user');
+
+
         // Route::get('/', function () {
         //     return 'ini User ';
         // });
@@ -97,7 +108,7 @@ Route::group([ "middleware" => ['auth:sanctum', 'verified'] ], function() {
 
     Route::get('dashboard/export/pdf', [ Notifikasi::class, "exportPDF" ])->name('pdf');
     Route::get('dashboard/export/excel', [ Notifikasi::class, "exportExcel" ])->name('excel');
-
+    Route::get('dashboard/notif/aduan', [ Notifikasi::class, "notifAduan" ])->name('notifAduan');
     // Route::get('dashboard/export/excel', function(Request $request) {
     //     // dd($request->query('mulaiTanggal'));
     //     return Excel::download(new LaporanAduanExport($request), 'filenya.xlsx');

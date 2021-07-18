@@ -55,7 +55,7 @@ class HistoryAduan extends Component
     public function toPDF()
     {
         // $this->redirectRoute('pdf');
-        return redirect()->route('pdf',['mulaiTanggal'=>$this->mulaiTanggal,'sampaiTanggal'=>$this->sampaiTanggal]);
+        return redirect()->route('pdf',['mulaiTanggal'=>$this->mulaiTanggal." 00:00:00",'sampaiTanggal'=>$this->sampaiTanggal." 23:59:59"]);
     }
     public function exportPDF()
     {
@@ -94,8 +94,8 @@ class HistoryAduan extends Component
                     ->where('status', '=' , 1)
                     ->where('is_done_solusi', '=' , 1)
                     ->where('is_approv', '=' , 1)
-                    ->whereBetween('tgl_selesai', [$this->mulaiTanggal, $this->sampaiTanggal])
-                    ->orWhereBetween('tgl_dibuat', [$this->mulaiTanggal, $this->sampaiTanggal])
+                    ->whereBetween('tgl_selesai', [$this->mulaiTanggal." 00:00:00", $this->sampaiTanggal." 23:59:59"])
+                    // ->orWhereBetween('tgl_dibuat', [$this->mulaiTanggal." 00:00:00", $this->sampaiTanggal." 23:59:59"])
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     // ->orderBy('status', $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);

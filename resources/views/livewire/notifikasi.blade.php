@@ -19,6 +19,9 @@
                 @case('exportexcel')
                     href="{{ route('excel',['filenya' => $textnya->lokasi_file]) }}"
                     @break
+                @case('notifaduan')
+                    href="{{ route('notifAduan',['url' => $textnya->url]) }}"
+                    @break
                 @default
 
             @endswitch
@@ -49,4 +52,5 @@
           </div>
         </div>
     </li>
+    {!! Toastr::message() !!}
 </div>

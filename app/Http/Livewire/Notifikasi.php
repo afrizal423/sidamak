@@ -3,10 +3,12 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Events\Notifikasi as EventsNotifikasi;
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
+use App\Events\Notifikasi as EventsNotifikasi;
 use App\Models\Notifikasi as ModelsNotifikasi;
 
 class Notifikasi extends Component
@@ -14,6 +16,7 @@ class Notifikasi extends Component
     protected $listeners = ['echo:notifikasiBaru,.Notifikasi' => 'getResponDariSocket'];
     public $beep=false;
     public $textnya, $datanya;
+    public $notifAduan;
 
     public function getResponDariSocket()
     {
@@ -28,6 +31,16 @@ class Notifikasi extends Component
             $this->beep = true;
         } else {
             $this->beep = false;
+        }
+        if (Auth::user()->roles == 1) {
+            $cek = ModelsNotifikasi::where('user_id', auth()->user()->id)
+                    ->where('is_read', 0)
+                    ->where('type', '=', 'notifaduan')
+                    ->get();
+            if ($cek->count() > 0) {
+                Toastr::warning('Aduan Baru', 'Ada aduan masuk, silahkan menuju halaman <a href="/dashboard/user" rel="noopener noreferrer"> Dashboard</a>', ["positionClass" => "toast-bottom-right"]);
+            }
+
         }
     }
 
@@ -51,6 +64,20 @@ class Notifikasi extends Component
                 # code...
                 break;
         }
+    }
+
+    public function notifAduan(Request $request)
+    {
+        // Storage::download(Crypt::decryptString($request->query('filenya')));
+        // echo $request->query('filenya');
+        $id = ModelsNotifikasi::where('text', 'like', '%'.$request->query('url').'%')
+        ->first()->id;
+        $dt = ModelsNotifikasi::find($id);
+        $dt->is_read = true;
+        $dt->save();
+        // dd(Crypt::decryptString($request->query('filenya')));
+        broadcast(new EventsNotifikasi());
+        return redirect()->route('dashboard_user');
     }
 
     public function exportPDF(Request $request)

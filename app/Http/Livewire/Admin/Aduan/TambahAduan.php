@@ -204,7 +204,7 @@ class TambahAduan extends Component
     {
         $this->items = Pegawai::query()
             ->where('nama_pegawai', 'like', "%$this->searchText%")
-            ->whereNotIn('id', $this->selectedIds)
+            // ->whereNotIn('id', $this->selectedIds)
             ->limit(10)
             ->get();
         return view('livewire.admin.aduan.tambah-aduan');
