@@ -23,5 +23,7 @@
               </div>
             </div>
         </div>
+
+        <livewire:table.dashboard-admin />
     </div>
 </x-app-layout>

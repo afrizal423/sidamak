@@ -2,9 +2,14 @@
 
 namespace App\Http\Livewire\Table;
 
+use stdClass;
 use App\Models\Keluhan;
 use Livewire\Component;
+use App\Models\Notifikasi;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Crypt;
+use App\Events\Notifikasi as EventsNotifikasi;
+
 
 class PenangananAduan extends Component
 {
@@ -60,6 +65,19 @@ class PenangananAduan extends Component
             'solusi' => $this->solusi,
             'is_done_solusi' => true
         ]);
+        // notif
+        $dt = new stdClass();
+        $dt->text='Aduan telah selesai, silahkan approv ke halaman approval untuk mengerjakannya.';
+        $dt->url=Crypt::encryptString(route('approval_aduan'));
+        $dt->icon='fas fa-info';
+
+        $nt= new Notifikasi();
+        $nt->type='notifapprov';
+        $nt->text=json_encode($dt);
+        $nt->user_id=1;
+        $nt->save();
+        // disini panggil broadcast notifikasi
+        broadcast(new EventsNotifikasi());
         $this->tutupModal();
         session()->flash('success','Category Created Successfully!!');
     }

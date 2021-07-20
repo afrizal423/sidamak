@@ -33,9 +33,9 @@ class AduanDev extends Seeder
             $ad->nama_pelapor = $faker->name;
             $ad->keterangan = $faker->sentence;
             $ad->solusi = $faker->text;
-            $ad->status = 1;
+            $ad->status = rand(1, 3);
             $ad->is_done_solusi = 1;
-            $ad->is_approv = 1;
+            $ad->is_approv = rand(0, 1);
             $ad->tgl_dibuat=$faker->dateTimeBetween();
             $ad->tgl_selesai=$faker->dateTimeBetween();
             $ad->save();

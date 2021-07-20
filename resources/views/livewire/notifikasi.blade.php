@@ -22,6 +22,9 @@
                 @case('notifaduan')
                     href="{{ route('notifAduan',['url' => $textnya->url]) }}"
                     @break
+                @case('notifapprov')
+                    href="{{ route('notifapprov',['url' => $textnya->url]) }}"
+                    @break
                 @default
 
             @endswitch

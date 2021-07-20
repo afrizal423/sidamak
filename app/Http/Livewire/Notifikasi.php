@@ -42,6 +42,16 @@ class Notifikasi extends Component
             }
 
         }
+        if (Auth::user()->roles == 0) {
+            $cek = ModelsNotifikasi::where('user_id', auth()->user()->id)
+                    ->where('is_read', 0)
+                    ->where('type', '=', 'notifapprov')
+                    ->get();
+            if ($cek->count() > 0) {
+                Toastr::warning('Aduan telah selesai', 'silahkan approv ke halaman <a href="/dashboard/admin/aduan/approvaladuan" rel="noopener noreferrer"> approval</a> untuk mengerjakannya.', ["positionClass" => "toast-bottom-right"]);
+            }
+
+        }
     }
 
     public function test($dt)
@@ -78,6 +88,20 @@ class Notifikasi extends Component
         // dd(Crypt::decryptString($request->query('filenya')));
         broadcast(new EventsNotifikasi());
         return redirect()->route('dashboard_user');
+    }
+
+    public function notifApprov(Request $request)
+    {
+        // Storage::download(Crypt::decryptString($request->query('filenya')));
+        // echo $request->query('filenya');
+        $id = ModelsNotifikasi::where('text', 'like', '%'.$request->query('url').'%')
+        ->first()->id;
+        $dt = ModelsNotifikasi::find($id);
+        $dt->is_read = true;
+        $dt->save();
+        // dd(Crypt::decryptString($request->query('filenya')));
+        broadcast(new EventsNotifikasi());
+        return redirect()->route('approval_aduan');
     }
 
     public function exportPDF(Request $request)

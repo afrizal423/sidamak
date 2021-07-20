@@ -16,6 +16,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Livewire\Table\HistoryAduan;
 use App\Http\Controllers\DivisiController;
 use App\Http\Livewire\Pegawai\Tambahpegawai;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,39 @@ Route::get('/', FormAduan::class)->name('landing');
 
 Route::get('/aduan', function() {
     dd(broadcast(new NewAduan('coba')));
+
+    return true;
+  });
+
+Route::get('/relasi', function() {
+    $dt = DB::table('pegawai as pgw')
+            ->select(DB::raw('pgw.nama_pegawai, (SELECT count(*)
+            FROM `pegawai` as pg
+            inner join keluhan_pegawai as kp
+            on pgw.id = kp.id_pegawai
+            inner join keluhan as k
+            on kp.id_keluhan = k.id
+            where pgw.id = pg.id
+            and k.status = 1 and k.is_approv = 1 and k.is_done_solusi = 1) as selesai ,
+            (SELECT count(*)
+            FROM `pegawai` as pg
+            inner join keluhan_pegawai as kp
+            on pgw.id = kp.id_pegawai
+            inner join keluhan as k
+            on kp.id_keluhan = k.id
+            where pgw.id = pg.id
+            and k.status = 3 and k.is_approv = 0 and k.is_done_solusi = 1) as pending ,
+            (SELECT count(*)
+            FROM `pegawai` as pg
+            inner join keluhan_pegawai as kp
+            on pgw.id = kp.id_pegawai
+            inner join keluhan as k
+            on kp.id_keluhan = k.id
+            where pgw.id = pg.id
+            and k.status = 2 and k.is_approv = 0 and k.is_done_solusi = 0) as progress'))
+            ->get();
+    // echo json_encode($dt);
+    dd($dt);
 
     return true;
   });
@@ -109,6 +143,7 @@ Route::group([ "middleware" => ['auth:sanctum', 'verified'] ], function() {
     Route::get('dashboard/export/pdf', [ Notifikasi::class, "exportPDF" ])->name('pdf');
     Route::get('dashboard/export/excel', [ Notifikasi::class, "exportExcel" ])->name('excel');
     Route::get('dashboard/notif/aduan', [ Notifikasi::class, "notifAduan" ])->name('notifAduan');
+    Route::get('dashboard/notif/approv', [ Notifikasi::class, "notifApprov" ])->name('notifapprov');
     // Route::get('dashboard/export/excel', function(Request $request) {
     //     // dd($request->query('mulaiTanggal'));
     //     return Excel::download(new LaporanAduanExport($request), 'filenya.xlsx');
