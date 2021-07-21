@@ -40,6 +40,21 @@ class Notifikasi extends Component
             if ($cek->count() > 0) {
                 Toastr::warning('Aduan Baru', 'Ada aduan masuk, silahkan menuju halaman <a href="/dashboard/user" rel="noopener noreferrer"> Dashboard</a>', ["positionClass" => "toast-bottom-right"]);
             }
+            $cek = ModelsNotifikasi::where('user_id', auth()->user()->id)
+                    ->where('is_read', 0)
+                    ->where('type', '=', 'notifreminder')
+                    ->get();
+            if ($cek->count() > 0) {
+                Toastr::warning('Terdapat agenda pada hari ini', 'silahkan ke halaman <a href="/dashboard/user/reminder" rel="noopener noreferrer"> Kalender</a> untuk melihatnya.', ["positionClass" => "toast-bottom-right"]);
+            }
+            $cek = ModelsNotifikasi::where('user_id', auth()->user()->id)
+                    ->where('is_read', 0)
+                    ->where('type', '=', 'notifstatuspending')
+                    ->get();
+            if ($cek->count() > 0) {
+                Toastr::warning('Terdapat aduan statusnya pending', 'silahkan ke halaman <a href="/dashboard/user/aduan/penanganaduan" rel="noopener noreferrer"> penangan aduan</a> untuk melihatnya.', ["positionClass" => "toast-bottom-right"]);
+            }
+
 
         }
         if (Auth::user()->roles == 0) {
@@ -49,6 +64,20 @@ class Notifikasi extends Component
                     ->get();
             if ($cek->count() > 0) {
                 Toastr::warning('Aduan telah selesai', 'silahkan approv ke halaman <a href="/dashboard/admin/aduan/approvaladuan" rel="noopener noreferrer"> approval</a> untuk mengerjakannya.', ["positionClass" => "toast-bottom-right"]);
+            }
+            $cek = ModelsNotifikasi::where('user_id', auth()->user()->id)
+                    ->where('is_read', 0)
+                    ->where('type', '=', 'notifreminder')
+                    ->get();
+            if ($cek->count() > 0) {
+                Toastr::warning('Terdapat agenda pada hari ini', 'silahkan ke halaman <a href="/dashboard/admin/reminder" rel="noopener noreferrer"> Kalender</a> untuk melihatnya.', ["positionClass" => "toast-bottom-right"]);
+            }
+            $cek = ModelsNotifikasi::where('user_id', auth()->user()->id)
+                    ->where('is_read', 0)
+                    ->where('type', '=', 'notifstatuspending')
+                    ->get();
+            if ($cek->count() > 0) {
+                Toastr::warning('Terdapat aduan statusnya pending', 'silahkan ke halaman <a href="/dashboard/admin/aduan/manage" rel="noopener noreferrer"> Manage Aduan</a> untuk melihatnya.', ["positionClass" => "toast-bottom-right"]);
             }
 
         }
@@ -102,6 +131,42 @@ class Notifikasi extends Component
         // dd(Crypt::decryptString($request->query('filenya')));
         broadcast(new EventsNotifikasi());
         return redirect()->route('approval_aduan');
+    }
+
+    public function notifReminder(Request $request)
+    {
+        // Storage::download(Crypt::decryptString($request->query('filenya')));
+        // echo $request->query('filenya');
+        $id = ModelsNotifikasi::where('text', 'like', '%'.$request->query('url').'%')
+        ->first()->id;
+        $dt = ModelsNotifikasi::find($id);
+        $dt->is_read = true;
+        $dt->save();
+        // dd(Crypt::decryptString($request->query('filenya')));
+        broadcast(new EventsNotifikasi());
+        if (Auth::user()->roles == 0) {
+            return redirect()->route('reminder_index');
+        } else {
+            return redirect()->route('reminder_index_user');
+        }
+    }
+
+    public function notifStatusPending(Request $request)
+    {
+        // Storage::download(Crypt::decryptString($request->query('filenya')));
+        // echo $request->query('filenya');
+        $id = ModelsNotifikasi::where('text', 'like', '%'.$request->query('url').'%')
+        ->first()->id;
+        $dt = ModelsNotifikasi::find($id);
+        $dt->is_read = true;
+        $dt->save();
+        // dd(Crypt::decryptString($request->query('filenya')));
+        broadcast(new EventsNotifikasi());
+        if (Auth::user()->roles == 0) {
+            return redirect()->route('manage_aduan');
+        } else {
+            return redirect()->route('penanganan_aduan_user');
+        }
     }
 
     public function exportPDF(Request $request)

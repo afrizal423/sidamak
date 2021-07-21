@@ -144,6 +144,9 @@ Route::group([ "middleware" => ['auth:sanctum', 'verified'] ], function() {
     Route::get('dashboard/export/excel', [ Notifikasi::class, "exportExcel" ])->name('excel');
     Route::get('dashboard/notif/aduan', [ Notifikasi::class, "notifAduan" ])->name('notifAduan');
     Route::get('dashboard/notif/approv', [ Notifikasi::class, "notifApprov" ])->name('notifapprov');
+    Route::get('dashboard/notif/reminder', [ Notifikasi::class, "notifReminder" ])->name('notifreminder');
+    Route::get('dashboard/notif/statuspending', [ Notifikasi::class, "notifStatusPending" ])->name('notifstatuspending');
+
     // Route::get('dashboard/export/excel', function(Request $request) {
     //     // dd($request->query('mulaiTanggal'));
     //     return Excel::download(new LaporanAduanExport($request), 'filenya.xlsx');

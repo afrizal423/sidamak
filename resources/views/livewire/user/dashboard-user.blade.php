@@ -19,6 +19,9 @@
     <div>
         nanti chart disini
     </div>
+    <div class="card" style="padding: 15px">
+        <livewire:table.status-progress name="progressnya" />
+    </div>
     {!! Toastr::message() !!}
     {{-- <script>
         // toastr.info('Are you the 6 fingered man?');
@@ -39,5 +42,19 @@
 
     });
 </script>
+<script type="text/javascript">
+
+    window.livewire.on('show', () => {
+        console.log("buka modal");
+        $('#exampleModal').modal('show');
+        $("#exampleModal").appendTo("body");
+    });
+    window.livewire.on('tutup', () => {
+        console.log("tutup modal");
+        $('.close-modal').click();
+
+
+    });
+        </script>
 
 @endpush

@@ -13,7 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\UbahStatusAduan::class,
+        Commands\NotifReminder::class,
+        Commands\NotifAduanPending::class
     ];
 
     /**
@@ -24,7 +26,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('changestatusaduan:daily')->twiceDaily(1, 6);
+        $schedule->command('notifreminder:daily')->dailyAt('08:00');
+        $schedule->command('notifaduanpending:daily')->dailyAt('08:00');
+
+        $schedule->command('websockets:clean')->daily();
     }
 
     /**
