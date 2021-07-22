@@ -109,7 +109,7 @@ Route::group([ "middleware" => ['auth:sanctum', 'verified'] ], function() {
 
         Route::view('aduan', "pages.aduan.index-aduan")->name('aduan_index');
         Route::view('aduan/manage', "pages.aduan.manage-aduan")->name('manage_aduan');
-        Route::view('aduan/ubahaduan/{aduanId}', "pages.aduan.edit-aduan")->name('ubah_aduan');
+        Route::view('aduan/ubahaduan/{aduanId}', "pages.aduan.edit-aduan")->name('ubah_aduan_admin');
         Route::view('aduan/progressaduan', "pages.progress.progress-aduan")->name('progress_aduan');
         Route::view('aduan/approvaladuan', "pages.aduan.approval-aduan")->name('approval_aduan');
         Route::view('aduan/history', "pages.aduan.history-aduan")->name('history_aduan');
@@ -126,9 +126,12 @@ Route::group([ "middleware" => ['auth:sanctum', 'verified'] ], function() {
         //     return view('dashboard-user');;
         // })->name('dashboard_user');
         Route::view('/', "dashboard-user")->name('dashboard_user'); // diubah lagi waktu selesai layouting user
+
+        Route::view('aduan', "pages.aduan.index-aduan")->name('aduan_index_user');
+        Route::view('aduan/manage', "pages.aduan.manage-aduan")->name('manage_aduan_user');
         Route::view('aduan/progressaduan', "pages.progress.progress-aduan")->name('progress_aduan_user');
         Route::view('aduan/penanganaduan', "pages.aduan.penanganan-aduan")->name('penanganan_aduan_user');
-        Route::view('aduan/{aduanId}/ubahaduan', "pages.aduan.edit-aduan-user")->name('ubah_aduan_user');
+        Route::view('aduan/{aduanId}/ubahaduan', "pages.aduan.edit-aduan-user")->name('ubah_aduan');
         Route::view('aduan/history', "pages.aduan.history-aduan")->name('history_aduan_user');
 
         Route::view('reminder', "pages.reminder.index-reminder")->name('reminder_index_user');

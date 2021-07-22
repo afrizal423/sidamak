@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Illuminate\Http\Request;
-use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
@@ -38,21 +37,21 @@ class Notifikasi extends Component
                     ->where('type', '=', 'notifaduan')
                     ->get();
             if ($cek->count() > 0) {
-                Toastr::warning('Aduan Baru', 'Ada aduan masuk, silahkan menuju halaman <a href="/dashboard/user" rel="noopener noreferrer"> Dashboard</a>', ["positionClass" => "toast-bottom-right"]);
+                laratoast()->info('Ada aduan masuk, silahkan menuju halaman <a href="/dashboard/user" rel="noopener noreferrer"> Dashboard</a>',"Aduan Baru","bottom-right",['textAlign'=>'center']);
             }
             $cek = ModelsNotifikasi::where('user_id', auth()->user()->id)
                     ->where('is_read', 0)
                     ->where('type', '=', 'notifreminder')
                     ->get();
             if ($cek->count() > 0) {
-                Toastr::warning('Terdapat agenda pada hari ini', 'silahkan ke halaman <a href="/dashboard/user/reminder" rel="noopener noreferrer"> Kalender</a> untuk melihatnya.', ["positionClass" => "toast-bottom-right"]);
+                laratoast()->info('silahkan ke halaman <a href="/dashboard/user/reminder" rel="noopener noreferrer"> Kalender</a> untuk melihatnya.',"Terdapat agenda pada hari ini","bottom-right",['textAlign'=>'center']);
             }
             $cek = ModelsNotifikasi::where('user_id', auth()->user()->id)
                     ->where('is_read', 0)
                     ->where('type', '=', 'notifstatuspending')
                     ->get();
             if ($cek->count() > 0) {
-                Toastr::warning('Terdapat aduan statusnya pending', 'silahkan ke halaman <a href="/dashboard/user/aduan/penanganaduan" rel="noopener noreferrer"> penangan aduan</a> untuk melihatnya.', ["positionClass" => "toast-bottom-right"]);
+                laratoast()->info('silahkan ke halaman <a href="/dashboard/user/aduan/penanganaduan" rel="noopener noreferrer"> penangan aduan</a> untuk melihatnya.',"Terdapat aduan statusnya pending","bottom-right",['textAlign'=>'center']);
             }
 
 
@@ -63,21 +62,21 @@ class Notifikasi extends Component
                     ->where('type', '=', 'notifapprov')
                     ->get();
             if ($cek->count() > 0) {
-                Toastr::warning('Aduan telah selesai', 'silahkan approv ke halaman <a href="/dashboard/admin/aduan/approvaladuan" rel="noopener noreferrer"> approval</a> untuk mengerjakannya.', ["positionClass" => "toast-bottom-right"]);
+                laratoast()->info('silahkan approv ke halaman <a href="/dashboard/admin/aduan/approvaladuan" rel="noopener noreferrer"> approval</a> untuk mengerjakannya.',"Aduan telah selesai","bottom-right",['textAlign'=>'center']);
             }
             $cek = ModelsNotifikasi::where('user_id', auth()->user()->id)
                     ->where('is_read', 0)
                     ->where('type', '=', 'notifreminder')
                     ->get();
             if ($cek->count() > 0) {
-                Toastr::warning('Terdapat agenda pada hari ini', 'silahkan ke halaman <a href="/dashboard/admin/reminder" rel="noopener noreferrer"> Kalender</a> untuk melihatnya.', ["positionClass" => "toast-bottom-right"]);
+                laratoast()->info('silahkan ke halaman <a href="/dashboard/admin/reminder" rel="noopener noreferrer"> Kalender</a> untuk melihatnya.',"Terdapat agenda pada hari ini","bottom-right",['textAlign'=>'center']);
             }
             $cek = ModelsNotifikasi::where('user_id', auth()->user()->id)
                     ->where('is_read', 0)
                     ->where('type', '=', 'notifstatuspending')
                     ->get();
             if ($cek->count() > 0) {
-                Toastr::warning('Terdapat aduan statusnya pending', 'silahkan ke halaman <a href="/dashboard/admin/aduan/manage" rel="noopener noreferrer"> Manage Aduan</a> untuk melihatnya.', ["positionClass" => "toast-bottom-right"]);
+                laratoast()->info('silahkan ke halaman <a href="/dashboard/admin/aduan/manage" rel="noopener noreferrer"> Manage Aduan</a> untuk melihatnya.',"Terdapat aduan statusnya pending","bottom-right",['textAlign'=>'center']);
             }
 
         }

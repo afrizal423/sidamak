@@ -168,8 +168,8 @@ return [
         browner12\helpers\HelperServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        Brian2694\Toastr\ToastrServiceProvider::class,
-
+        // Brian2694\Toastr\ToastrServiceProvider::class,
+        Afrizalmy\Laratoast\LaratoastServiceProvider::class,
         /*
          * Application Service Providers...
          */

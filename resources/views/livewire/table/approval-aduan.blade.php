@@ -32,6 +32,7 @@
                 <th>Status</th>
                 <th>Solusi Terisi</th>
                 <th>Waktu Dibuat</th>
+                <th>Beri penilaian</th>
                 <th>Action</th>
             </tr>
         </x-slot>
@@ -61,9 +62,21 @@
                     <td>{{ $aduan->status == 2 ? "Sedang Berjalan / Progress" : ($aduan->status == 3 ? "Pending" : "") }}</td>
                     <td>{!! $aduan->is_done_solusi == 1 ? "<i class='fas fa-check-circle' style='color:green;'>" : "<i class='fas fa-times-circle' style='color:red;'>" !!}</td>
                     <td>{{ Carbon\Carbon::parse($aduan->created_at)->isoFormat('LLLL') }}</td>
+                    <td>
+                        <div class="dropdown d-inline">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Beri Penilaian
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item has-icon" wire:click="penilaian({{ $aduan->id }},0)">Kurang</a>
+                              <a class="dropdown-item has-icon" wire:click="penilaian({{ $aduan->id }},1)">Baik</a>
+                              <a class="dropdown-item has-icon" wire:click="penilaian({{ $aduan->id }},2)">Sangat Baik</a>
+                            </div>
+                        </div>
+                    </td>
                     <td class="whitespace-no-wrap row-action--icon">
                         <a role="button" wire:click.prevent="lihat({{ $aduan->id }})" class="mr-3"><i class="fa fa-16px fa-info"></i></a>
-                        <a role="button" href="{{ route('ubah_aduan', $aduan->id) }}" class="mr-3"><i class="fa fa-16px fa-cog text-gray-500"></i></a>
+                        <a role="button" href="{{ route('ubah_aduan_admin', $aduan->id) }}" class="mr-3"><i class="fa fa-16px fa-cog text-gray-500"></i></a>
                     </td>
                 </tr>
             @endforeach

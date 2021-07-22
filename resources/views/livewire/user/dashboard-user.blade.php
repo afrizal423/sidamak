@@ -22,7 +22,7 @@
     <div class="card" style="padding: 15px">
         <livewire:table.status-progress name="progressnya" />
     </div>
-    {!! Toastr::message() !!}
+    {{-- {!! Toastr::message() !!} --}}
     {{-- <script>
         // toastr.info('Are you the 6 fingered man?');
         toastr.success('We do have the Kapua suite available.', 'Turtle Bay Resort <a href="http://google.com" target="_blank" rel="noopener noreferrer"> woi</a>', {timeOut: 5000})

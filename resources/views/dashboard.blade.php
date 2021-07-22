@@ -11,19 +11,10 @@
     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
         {{-- <x-jet-welcome /> --}}
         <div class="container">
-            <div class="row">
-              <div class="col-sm">
-                One of three columns
-              </div>
-              <div class="col-sm">
-                One of three columns
-              </div>
-              <div class="col-sm">
-                One of three columns
-              </div>
-            </div>
+            <livewire:admin.dashboard.chart.chart1 />
         </div>
 
         <livewire:table.dashboard-admin />
     </div>
+
 </x-app-layout>

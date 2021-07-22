@@ -34,6 +34,24 @@ class ApprovalAduan extends Component
         }
 
     }
+    public function penilaian($id, $tmpnilai){
+        $nilai='';
+        switch ($tmpnilai) {
+            case '0':
+                $nilai = 'Kurang';
+                break;
+            case '1':
+                $nilai = 'Baik';
+                break;
+            case '2':
+                $nilai = 'Sangat Baik';
+                break;
+
+            default:
+                break;
+        }
+        dd($nilai, $id);
+    }
     public function approv(){
         $this->model::query()
             ->whereIn('id',$this->selectedtypes)

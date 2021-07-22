@@ -34,11 +34,14 @@
         <!-- Scripts -->
         <script defer src="{{ asset('vendor/alpine.js') }}"></script>
         {{-- <script src="{{ asset('stisla/js/modules/jquery.min.js') }}"></script> --}}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> --}}
 
         {{-- <link rel="stylesheet" href="{{ asset('toast/jquery.toast.min.css') }}">
         <script src="{{ asset('toast/jquery.toast.min.js') }}"></script> --}}
+        @laratoast_css
+        @laratoast_js
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 
     </head>

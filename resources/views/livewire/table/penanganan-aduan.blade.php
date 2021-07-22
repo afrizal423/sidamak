@@ -42,7 +42,7 @@
                     <td class="whitespace-no-wrap row-action--icon">
                         <a role="button" wire:click.prevent="lihat({{ $aduan->id }})" class="mr-3"><i class="fa fa-16px fa-info"></i></a>
                         <a role="button" wire:click.prevent="solusi({{ $aduan->id }})" class="mr-3"><i class="fa fa-16px fa-pen text-yellow-400"></i></a>
-                        <a role="button" href="{{ route('ubah_aduan_user', $aduan->id) }}" class="mr-3"><i class="fa fa-16px fa-cog text-gray-500"></i></a>
+                        <a role="button" href="{{ route('ubah_aduan', $aduan->id) }}" class="mr-3"><i class="fa fa-16px fa-cog text-gray-500"></i></a>
                     </td>
                 </tr>
             @endforeach
