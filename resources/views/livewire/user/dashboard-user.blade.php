@@ -16,10 +16,12 @@
         <livewire:admin.aduan.tambah-aduan action="ubahAduanUser" :aduanId="$idnya" />
     </div>
     @else
-    <div>
-        nanti chart disini
+    <div class="card" style="padding: 15px">
+        <h1 style="font-size: 15pt" class="text-center"> Grafik Aduan rentang waktu 1 tahun.</h1>
+        <livewire:admin.dashboard.chart.chart1 />
     </div>
     <div class="card" style="padding: 15px">
+        <h1 style="font-size: 15pt" class="text-center"> Tabel progress aduan yang sedang berlangsung.</h1>
         <livewire:table.status-progress name="progressnya" />
     </div>
     {{-- {!! Toastr::message() !!} --}}

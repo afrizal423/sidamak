@@ -26,11 +26,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('changestatusaduan:daily')->twiceDaily(1, 6);
-        $schedule->command('notifreminder:daily')->everyMinute();
-        // $schedule->command('notifaduanpending:daily')->dailyAt('08:00');
+        $schedule->command('changestatusaduan:daily')->twiceDaily(1, 6);
+        $schedule->command('notifreminder:daily')->dailyAt('08:00');
+        $schedule->command('notifaduanpending:daily')->dailyAt('08:00');
 
-        $schedule->command('websockets:clean')->everyMinute();
+        $schedule->command('websockets:clean')->daily();
     }
 
     /**

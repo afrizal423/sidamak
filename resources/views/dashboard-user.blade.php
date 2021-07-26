@@ -8,7 +8,7 @@
         </div>
     </x-slot>
 
-    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+    <div class="">
         <livewire:user.dashboard-user
             />
         {{-- <div class="container">
