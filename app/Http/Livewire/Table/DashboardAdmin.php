@@ -21,7 +21,7 @@ class DashboardAdmin extends Component
             ->select(DB::raw('pgw.id, pgw.nama_pegawai, (SELECT count(*)
             FROM `pegawai` as pg
             inner join keluhan_pegawai as kp
-            on pgw.id = kp.id_pegawai
+            on pg.id = kp.id_pegawai
             inner join keluhan as k
             on kp.id_keluhan = k.id
             where pgw.id = pg.id
@@ -29,7 +29,7 @@ class DashboardAdmin extends Component
             (SELECT count(*)
             FROM `pegawai` as pg
             inner join keluhan_pegawai as kp
-            on pgw.id = kp.id_pegawai
+            on pg.id = kp.id_pegawai
             inner join keluhan as k
             on kp.id_keluhan = k.id
             where pgw.id = pg.id
@@ -37,7 +37,7 @@ class DashboardAdmin extends Component
             (SELECT count(*)
             FROM `pegawai` as pg
             inner join keluhan_pegawai as kp
-            on pgw.id = kp.id_pegawai
+            on pg.id = kp.id_pegawai
             inner join keluhan as k
             on kp.id_keluhan = k.id
             where pgw.id = pg.id
